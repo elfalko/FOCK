@@ -4,7 +4,7 @@
 
 ## Why
 
-[CRKBD](github.com/foostan/crkbd) is nice, but could use more stagger.
+[CRKBD](https://github.com/foostan/crkbd) is nice, but could use more stagger.
 
 ## Repo overview
 
