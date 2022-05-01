@@ -1,0 +1,70 @@
+# FOCK
+# Falk's overstaggered corne keyboard
+# 
+# for use with ergogen
+# https://ergogen.cache.works/
+
+# todo
+#   space to mount uc
+#   space to mount connectors
+#   verify key sizes and spacings (print plate and test?)
+
+points:
+  zones:
+    matrix:
+      columns:
+        outer:
+          spread: cx
+        pinky:
+          spread: cx
+        ring:
+          spread: cx+2
+          stagger: cy-3
+          rotate: -10
+        middle:
+          spread: cx
+          stagger: cy/2
+        index:
+          spread: cx
+          stagger: -cy/2
+          rotate: -10
+        inner:
+          spread: cx
+        thumb:
+          spread: cx
+          origin: [cx,-0.6*cx]
+          rotate: 80
+      rows:
+        bottom:
+        home:
+        top:
+      key:
+        padding: cx
+        spread: cy
+        bind: cx * 0.6
+  rotate: -30
+  mirror:
+    ref: matrix_thumb_home
+    distance: 120
+outlines:
+  exports:
+    outline:
+      main:
+        type: keys
+        side: left
+        size: 5
+    top_plate:
+      main: 
+        type: keys
+        side: left
+        size: 5
+      min:
+        type: keys
+        side: left
+        bound: false
+        size: cy
+        operation: subtract
+cases:
+  basecase:
+    - name: top_plate
+      extrude: 2
