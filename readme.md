@@ -9,7 +9,7 @@
 ## Repo overview
 
 * Readme - this readme
-* fock.txt - generator file for [ergogen](https://github.com/ergogen/ergogen)
+* fock.txt - generator file for [ergogen](https://github.com/ergogen/ergogen) (for direct use try [this](https://ergogen.cache.works/) and copy in the contents
 * img/ - images for documentation
 
 ## TODO
