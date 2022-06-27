@@ -38,6 +38,7 @@ points:
         bottom:
         home:
         top:
+        num:
       key:
         padding: cx
         spread: cy
@@ -45,7 +46,7 @@ points:
   rotate: -30
   mirror:
     ref: matrix_thumb_home
-    distance: 120
+    distance: 140
 outlines:
   exports:
     outline:
@@ -53,7 +54,7 @@ outlines:
         type: keys
         side: left
         size: 5
-    top_plate:
+    top_plate_capsize:
       main: 
         type: keys
         side: left
@@ -63,8 +64,27 @@ outlines:
         side: left
         bound: false
         size: cy
+        operation: subtract    
+    top_plate_keysize:
+      main: 
+        type: keys
+        side: left
+        size: 5
+      min:
+        type: keys
+        side: left
+        bound: false
+        size: 13.8
         operation: subtract
+
 cases:
-  basecase:
-    - name: top_plate
-      extrude: 2
+#  fits the key cap size, not the switches
+#  capsize:
+#    - name: top_plate_capsize
+#      extrude: 2
+# fits switches for handwiring
+  keysize:
+     - name: top_plate_keysize
+       extrude: 2
+
+  
