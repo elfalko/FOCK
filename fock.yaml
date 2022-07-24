@@ -7,7 +7,8 @@
 # todo
 #   space to mount uc
 #   space to mount connectors
-#   verify key sizes and spacings (print plate and test?)
+#   usb c connector
+#   figure out doublesidedness
 
 points:
   zones:
@@ -15,34 +16,120 @@ points:
       columns:
         outer:
           spread: cx
+          key:
+            column_net: P1
+            column_mark: PO
         pinky:
           spread: cx
+          key:
+            column_net: P2
+            column_mark: P
         ring:
           spread: cx+2
           stagger: cy-3
           rotate: -10
+          key:
+            column_net: P3
+            column_mark: R
         middle:
           spread: cx
           stagger: cy/2
+
+          key:
+            column_net: P4
+            column_mark: M
         index:
           spread: cx
           stagger: -cy/2
           rotate: -10
+          key:
+            column_net: P5
+            column_mark: I
         inner:
           spread: cx
+
+          key:
+            column_net: P6
+            column_mark: IO
         thumb:
           spread: cx
           origin: [cx,-0.6*cx]
           rotate: 80
+
+          key:
+            rotate: -90
+            column_net: P7
+            column_mark: T
       rows:
         bottom:
+          row_net: P10
+          row_mark: LB
+          mirror:
+            row_net: P20
+            row_mark: RB
         home:
+          row_net: P11
+          row_mark: LH
+          mirror:
+            row_net: P21
+            row_mark: RH
         top:
+          row_net: P12
+          row_mark: LT
+          mirror:
+            row_net: P22
+            row_mark: RT
         num:
+          row_net: P13
+          row_mark: LN
+          mirror:
+            row_net: P23
+            row_mark: RN
       key:
         padding: cx
         spread: cy
         bind: cx * 0.6
+        # quadruple combined key footprint
+        footprints: &quad
+          mx:
+            type: mx
+            nets:
+              from: =colrow
+              to: =column_net
+          alps:
+            type: alps
+            nets:
+              from: =colrow
+              to: =column_net
+          <<: &choc
+            choc:
+              type: choc
+              nets:
+                from: =colrow
+                to: =column_net
+          diode:
+            type: diode
+            anchor:
+              rotate: 90
+              shift: [8.25, 0]
+            nets:
+              from: =colrow
+              to: =row_net
+        mirror:
+          footprints: &quad_mirror
+            mx:
+              nets:
+                from: =column_net
+                to: =colrow
+            alps:
+              nets:
+                from: =column_net
+                to: =colrow
+            <<: &choc_mirror
+              choc:
+                nets:
+                  from: =column_net
+                  to: =colrow
   rotate: -30
   mirror:
     ref: matrix_thumb_home
@@ -86,5 +173,42 @@ cases:
   keysize:
      - name: top_plate_keysize
        extrude: 2
-
-  
+pcbs:
+  main:
+    outlines:
+      edge:
+        outline: outline
+        layer: Edge.Cuts
+    footprints:
+      mcu:
+        type: promicro
+        anchor:
+          ref:
+            - matrix_inner_top
+            - mirror_matrix_inner_top
+          shift: [0, -23]
+          rotate: 270
+      reset:
+        type: button
+        anchor:
+          ref:
+            - matrix_inner_top
+            - mirror_matrix_inner_top
+          shift: [0, -17]
+          rotate: 90
+        nets:
+          from: RST
+          to: GND
+        params:
+          side: 
+      battery:
+        type: jstph
+        anchor:
+          ref:
+            - matrix_inner_bottom
+            - mirror_matrix_inner_bottom
+          shift: [0, -43]
+          rotate: 180
+        nets:
+          pos: RAWER
+          neg: GND
