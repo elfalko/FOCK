@@ -5,10 +5,12 @@
 # https://ergogen.cache.works/
 
 # todo
-#   space to mount uc
-#   space to mount connectors
+#   flip side switch
+#   flip battery connector or just flip leads in connector
+#   flip the slider or can this work with just one
 #   usb c connector
-#   figure out doublesidedness
+#   clean up cases
+#   ask the discord
 
 points:
   zones:
@@ -39,15 +41,14 @@ points:
             column_net: P4
             column_mark: M
         index:
-          spread: cx
+          spread: cx+0.2
           stagger: -cy/2
-          rotate: -10
+          rotate: -9.5
           key:
             column_net: P5
             column_mark: I
         inner:
           spread: cx
-
           key:
             column_net: P6
             column_mark: IO
@@ -55,7 +56,6 @@ points:
           spread: cx
           origin: [cx,-0.6*cx]
           rotate: 80
-
           key:
             rotate: -90
             column_net: P7
@@ -63,50 +63,31 @@ points:
       rows:
         bottom:
           row_net: P10
-          row_mark: LB
-          mirror:
-            row_net: P20
-            row_mark: RB
+          row_mark: B
         home:
           row_net: P11
-          row_mark: LH
-          mirror:
-            row_net: P21
-            row_mark: RH
+          row_mark: H
         top:
           row_net: P12
-          row_mark: LT
-          mirror:
-            row_net: P22
-            row_mark: RT
+          row_mark: T
         num:
           row_net: P13
-          row_mark: LN
-          mirror:
-            row_net: P23
-            row_mark: RN
+          row_mark: N
       key:
         padding: cx
         spread: cy
         bind: cx * 0.6
         # quadruple combined key footprint
         footprints: &quad
-          mx:
-            type: mx
+          choc:
+            type: choc
+            params:
+              hotswap: true
+              reverse: true
+              keycaps: true
             nets:
               from: =colrow
               to: =column_net
-          alps:
-            type: alps
-            nets:
-              from: =colrow
-              to: =column_net
-          <<: &choc
-            choc:
-              type: choc
-              nets:
-                from: =colrow
-                to: =column_net
           diode:
             type: diode
             anchor:
@@ -115,28 +96,10 @@ points:
             nets:
               from: =colrow
               to: =row_net
-        mirror:
-          footprints: &quad_mirror
-            mx:
-              nets:
-                from: =column_net
-                to: =colrow
-            alps:
-              nets:
-                from: =column_net
-                to: =colrow
-            <<: &choc_mirror
-              choc:
-                nets:
-                  from: =column_net
-                  to: =colrow
   rotate: -30
-  mirror:
-    ref: matrix_thumb_home
-    distance: 140
 outlines:
   exports:
-    outline:
+    o_keys:
       main:
         type: keys
         side: left
@@ -163,7 +126,102 @@ outlines:
         bound: false
         size: 13.8
         operation: subtract
-
+    mounting_holes:
+      m_1:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_pinky_bottom
+          - matrix_thumb_num
+          shift: [0, 0]
+        radius: 2.25
+      m_2:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_pinky_num
+          - matrix_ring_num
+        radius: 2.25
+      m_3:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_index_num
+          - matrix_middle_num
+        radius: 2.25
+      m_4:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_inner_bottom
+          - matrix_thumb_bottom
+        radius: 2.25
+      m_5:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_outer_bottom
+          - matrix_pinky_home
+        radius: 2.25
+      m_6:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_outer_num
+          - matrix_pinky_top
+        radius: 2.25
+      m_7:
+        type: circle
+        anchor:
+          ref: 
+          - matrix_index_num
+          - matrix_inner_top
+        radius: 2.25
+    screw_holes:
+      $extends: outlines.exports.mounting_holes
+      m_5:
+        radius: 1
+      m_6:
+        radius: 1
+      m_7:
+        radius: 1
+    controller:
+      main:
+        type: rectangle
+        size: [25,50]
+        anchor:
+          ref: matrix_thumb_bottom
+          shift: [-cx/2-2.4,cx/2]
+          rotate: 10
+    cut_filler:
+      cf1:
+        type: rectangle
+        size: [3*cx,cx]
+        anchor:
+          ref: 
+            - matrix_ring_bottom
+            - matrix_middle_bottom
+          shift: [-1.5*cx,-cx*1.8]
+      cf2:
+        type: rectangle
+        size: [3*cx,cx]
+        anchor:
+          ref: 
+            - matrix_pinky_num
+            - matrix_pinky_top
+          shift: [0,0.25*cx]
+      cfe:
+        type: rectangle
+        size: [3*cx,cx]
+        anchor:
+          ref: 
+            - matrix_index_num
+          shift: [-2*cx,-0.26*cx]
+    pcb_shape:
+      - +o_keys
+      - +controller
+      - +cut_filler
+      - -screw_holes
 cases:
 #  fits the key cap size, not the switches
 #  capsize:
@@ -177,24 +235,28 @@ pcbs:
   main:
     outlines:
       edge:
-        outline: outline
+        outline: pcb_shape
         layer: Edge.Cuts
     footprints:
-      mcu:
+      mcu_top:
         type: promicro
         anchor:
-          ref:
-            - matrix_inner_top
-            - mirror_matrix_inner_top
-          shift: [0, -23]
-          rotate: 270
+          ref: matrix_inner_top
+          rotate: -90
+          shift: [1.5*cx+0.85,-20]
+      mcu_bot:
+        type: promicro
+        params:
+          orientation: "up"
+        anchor:
+          ref: matrix_inner_top
+          rotate: -90
+          shift: [1.5*cx-0.85,-20-1.25]
       reset:
         type: button
         anchor:
-          ref:
-            - matrix_inner_top
-            - mirror_matrix_inner_top
-          shift: [0, -17]
+          ref: matrix_inner_bottom
+          shift: [0.775*cx,0]
           rotate: 90
         nets:
           from: RST
@@ -204,11 +266,38 @@ pcbs:
       battery:
         type: jstph
         anchor:
-          ref:
-            - matrix_inner_bottom
-            - mirror_matrix_inner_bottom
-          shift: [0, -43]
-          rotate: 180
+          ref: 
+            - matrix_inner_home
+            - matrix_inner_top
+          shift: [0.775*cx,5]
+          rotate: 0
         nets:
           pos: RAWER
           neg: GND
+      trrs:
+        type: trrs
+        params:
+          reverse: true
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [2.1*cx,-0.5*cx]
+          rotate: -90
+        nets:
+          A: GND
+          B: P14
+          C: P15
+          D: RAWER
+      powerswitch:
+        type: slider
+        anchor:
+          ref: 
+          - matrix_inner_top
+          - matrix_inner_num
+          shift: [0.65*cx,0]
+          rotate: -90
+        nets:
+          from: RAW
+          to: RAWER
+        params:
+          side: B
