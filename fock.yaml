@@ -228,7 +228,7 @@ outlines:
     pcb_shape_fillet:
       - type: outline
         name: pcb_shape_pure
-        fillet: 5
+        fillet: 3
     pcb_shape:
       - +pcb_shape_fillet
       - -screw_holes
