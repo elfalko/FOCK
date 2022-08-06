@@ -108,16 +108,11 @@ outlines:
       main:
         type: keys
         side: left
-        size: 5
-    # o_keys:
-    #   - type: outline
-    #     name: o_keys_pure
-    #     fillet: 5
+        size: 4
     top_plate_capsize:
       main: 
-        type: keys
-        side: left
-        size: 5
+        type: outline
+        name: o_keys
       min:
         type: keys
         side: left
@@ -226,11 +221,15 @@ outlines:
           ref: 
             - matrix_index_num
           shift: [-2*cx,-0.26*cx]
-    pcb_shape:
+    pcb_shape_pure:
       - +o_keys
       - +controller
       - +cut_filler
-      - -screw_holes
+      # - -screw_holes
+    pcb_shape:
+      - type: outline
+        name: pcb_shape_pure
+        fillet: 5
 cases:
 #  fits the key cap size, not the switches
 #  capsize:
