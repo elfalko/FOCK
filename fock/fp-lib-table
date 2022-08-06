@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "random-keyboard-parts")(type "KiCad")(uri "/home/f/projects/keebs/fock/random-keyboard-parts.pretty")(options "")(descr ""))
+  (lib (name "Kailh_Choc")(type "KiCad")(uri "/home/f/projects/keebs/fock/MX_Alps_Hybrid/Kailh_Choc.pretty")(options "")(descr ""))
+)
