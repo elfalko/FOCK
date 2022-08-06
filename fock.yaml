@@ -4,13 +4,19 @@
 # for use with ergogen
 # https://ergogen.cache.works/
 
-# todo
-#   flip side switch
-#   flip battery connector or just flip leads in connector
-#   flip the slider or can this work with just one
-#   usb c connector
-#   clean up cases
-#   ask the discord
+# V1.0 decisions
+# - no leds
+# - no batteries
+# - no USB-C :C between boards
+# TODO
+# - ask the discord
+
+# V2.0 todo
+# - header for trackball
+# - intra-board USB-C
+# - flipped battery connector or just flip leads in connector
+# - move switch and battery so they are better placed for 
+
 
 points:
   zones:
@@ -19,38 +25,38 @@ points:
         outer:
           spread: cx
           key:
-            column_net: P1
+            column_net: P4
             column_mark: PO
         pinky:
           spread: cx
           key:
-            column_net: P2
+            column_net: P5
             column_mark: P
         ring:
           spread: cx+2
           stagger: cy-3
           rotate: -10
           key:
-            column_net: P3
+            column_net: P6
             column_mark: R
         middle:
           spread: cx
           stagger: cy/2
 
           key:
-            column_net: P4
+            column_net: P7
             column_mark: M
         index:
           spread: cx+0.2
           stagger: -cy/2
           rotate: -9.5
           key:
-            column_net: P5
+            column_net: P8
             column_mark: I
         inner:
           spread: cx
           key:
-            column_net: P6
+            column_net: P9
             column_mark: IO
         thumb:
           spread: cx
@@ -58,20 +64,20 @@ points:
           rotate: 80
           key:
             rotate: -90
-            column_net: P7
+            column_net: P10
             column_mark: T
       rows:
         bottom:
-          row_net: P10
+          row_net: P21
           row_mark: B
         home:
-          row_net: P11
+          row_net: P20
           row_mark: H
         top:
-          row_net: P12
+          row_net: P19
           row_mark: T
         num:
-          row_net: P13
+          row_net: P18
           row_mark: N
       key:
         padding: cx
@@ -91,12 +97,11 @@ points:
           diode:
             type: diode
             anchor:
-              rotate: 90
-              shift: [8.25, 0]
+              rotate: 0
+              shift: [0, -6]
             nets:
               from: =colrow
               to: =row_net
-  rotate: -30
 outlines:
   exports:
     o_keys:
@@ -252,7 +257,8 @@ pcbs:
           ref: matrix_inner_top
           rotate: -90
           shift: [1.5*cx-0.85,-20-1.25]
-      reset:
+
+      reset_top:
         type: button
         anchor:
           ref: matrix_inner_bottom
@@ -262,18 +268,19 @@ pcbs:
           from: RST
           to: GND
         params:
-          side: 
-      battery:
-        type: jstph
+          side: F
+      reset_bot:
+        type: button
         anchor:
-          ref: 
-            - matrix_inner_home
-            - matrix_inner_top
-          shift: [0.775*cx,5]
-          rotate: 0
+          ref: matrix_inner_bottom
+          shift: [0.775*cx,0]
+          rotate: 90
         nets:
-          pos: RAWER
-          neg: GND
+          from: RST
+          to: GND
+        params:
+          side: B
+
       trrs:
         type: trrs
         params:
@@ -285,19 +292,187 @@ pcbs:
           rotate: -90
         nets:
           A: GND
-          B: P14
-          C: P15
-          D: RAWER
-      powerswitch:
-        type: slider
+          B: P3
+          C: P4
+          D: RAW
+#         D: RAWER with switch
+
+      resistor_1_a:
+        type: pad
         anchor:
           ref: 
-          - matrix_inner_top
-          - matrix_inner_num
-          shift: [0.65*cx,0]
-          rotate: -90
+            - matrix_inner_bottom
+          shift: [31.5,-6.5]
+          rotate: 90
         nets:
-          from: RAW
-          to: RAWER
+          net: P4
         params:
-          side: B
+          text: "R1"
+          width: 1.4
+          height: 2.5
+          front: false
+      resistor_1_b:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          # +height+1
+          shift: [31.5+3.5,-6.5]
+          rotate: 90
+        nets:
+          net: RAW
+        params:
+          text: "4.7k"
+          width: 1.4
+          height: 2.5
+          front: false
+
+      resistor_2_a:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [31.5,-4]
+          rotate: 90
+        nets:
+          net: P3
+        params:
+          text: "R2"
+          width: 1.4
+          height: 2.5
+          front: false
+      resistor_2_b:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          # +height+1
+          shift: [31.5+3.5,-4]
+          rotate: 90
+        nets:
+          net: RAW
+        params:
+          text: "4.7k"
+          width: 1.4
+          height: 2.5
+          front: false
+
+      resistor_3_a:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [31.5,-11.75]
+          rotate: 90
+        nets:
+          net: P4
+        params:
+          text: "R1"
+          width: 1.4
+          height: 2.5
+          back: false
+
+      resistor_3_b:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [31.5+3.5,-11.75]
+          rotate: 90
+        nets:
+          net: RAW
+        params:
+          text: "4.7k"
+          width: 1.4
+          height: 2.5
+          back: false
+
+      resistor_4_a:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [31.5,-14.25]
+          rotate: 90
+        nets:
+          net: P3
+        params:
+          text: "R2"
+          width: 1.4
+          height: 2.5
+          back: false
+      resistor_4_b:
+        type: pad
+        anchor:
+          ref: 
+            - matrix_inner_bottom
+          shift: [31.5+3.5,-14.25]
+          rotate: 90
+        nets:
+          net: RAW
+        params:
+          text: "4.7k"
+          width: 1.4
+          height: 2.5
+          back: false
+
+# -- CUT in V1.0
+# battery and switch
+# oled support
+# 
+# no proper flip side support, aka doesn't mirror footprint
+# more parts to route and think about
+
+#      battery_top:
+#        type: jstph
+#        anchor:
+#          ref: 
+#            - matrix_inner_home
+#            - matrix_inner_top
+#          shift: [0.775*cx,5]
+#          rotate: 0
+#        nets:
+#          pos: RAWER
+#          neg: GND
+
+#      i2cheader_top:
+#        type: oled
+#        nets:
+#          A: GND
+#          B: P14
+#          C: P15
+#          D: RAWER
+#        params:
+#          side: F
+#        anchor:
+#          ref: 
+#            - matrix_inner_bottom
+#          shift: [1.5*cx,-0.5*cx]
+#          rotate: 0
+
+#      powerswitch_B:
+#        type: slider
+#        anchor:
+#          ref: 
+#          - matrix_inner_top
+#          - matrix_inner_num
+#          shift: [0.65*cx,0]
+#          rotate: -90
+#        nets:
+#          from: RAW
+#          to: RAWER
+#        params:
+#          side: B
+#      powerswitch_F:
+#        type: slider
+#        anchor:
+#          ref: 
+#          - matrix_inner_top
+#          - matrix_inner_num
+#          shift: [0.65*cx,0]
+#          rotate: -90
+#        nets:
+#          from: RAW
+#          to: RAWER
+#        params:
+#          side: F
