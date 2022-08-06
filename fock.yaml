@@ -17,6 +17,12 @@
 # - flipped battery connector or just flip leads in connector
 # - move switch and battery so they are better placed for 
 
+units:
+  keysize: 2
+  d_mh: 2.25
+  fillfix: -0.8
+  ctl_x: 33.8+keysize
+  ctl_y: 50
 
 points:
   zones:
@@ -108,7 +114,7 @@ outlines:
       main:
         type: keys
         side: left
-        size: 4
+        size: keysize
     top_plate_capsize:
       main: 
         type: outline
@@ -138,49 +144,49 @@ outlines:
           - matrix_pinky_bottom
           - matrix_thumb_num
           shift: [0, 0]
-        radius: 2.25
+        radius: d_mh
       m_2:
         type: circle
         anchor:
           ref: 
           - matrix_pinky_num
           - matrix_ring_num
-        radius: 2.25
+        radius: d_mh
       m_3:
         type: circle
         anchor:
           ref: 
           - matrix_index_num
           - matrix_middle_num
-        radius: 2.25
+        radius: d_mh
       m_4:
         type: circle
         anchor:
           ref: 
           - matrix_inner_bottom
           - matrix_thumb_bottom
-        radius: 2.25
+        radius: d_mh
       m_5:
         type: circle
         anchor:
           ref: 
           - matrix_outer_bottom
           - matrix_pinky_home
-        radius: 2.25
+        radius: d_mh
       m_6:
         type: circle
         anchor:
           ref: 
           - matrix_outer_num
           - matrix_pinky_top
-        radius: 2.25
+        radius: d_mh
       m_7:
         type: circle
         anchor:
           ref: 
           - matrix_index_num
           - matrix_inner_top
-        radius: 2.25
+        radius: d_mh
     screw_holes:
       $extends: outlines.exports.mounting_holes
       m_5:
@@ -192,44 +198,40 @@ outlines:
     controller:
       main:
         type: rectangle
-        size: [25,50]
+        size: [ctl_x,ctl_y]
         anchor:
-          ref: matrix_thumb_bottom
-          shift: [-cx/2-2.4,cx/2]
-          rotate: 10
+          ref: matrix_inner_bottom
+          shift: [0,-cx]
     cut_filler:
       cf1:
         type: rectangle
-        size: [3*cx,cx]
+        size: [3*cx,cy]
         anchor:
           ref: 
-            - matrix_ring_bottom
-            - matrix_middle_bottom
-          shift: [-1.5*cx,-cx*1.8]
+            - matrix_pinky_bottom
+          shift: [0,-0.5*cx-keysize+fillfix]
       cf2:
         type: rectangle
-        size: [3*cx,cx]
+        size: [2*cx,2.5*cx+keysize-fillfix]
         anchor:
-          ref: 
-            - matrix_pinky_num
-            - matrix_pinky_top
-          shift: [0,0.25*cx]
+          ref: matrix_pinky_home
       cfe:
         type: rectangle
-        size: [3*cx,cx]
+        size: [2.5*cx+keysize-fillfix,2*cx]
         anchor:
-          ref: 
-            - matrix_index_num
-          shift: [-2*cx,-0.26*cx]
+          ref: matrix_index_home
+          rotate: 90
     pcb_shape_pure:
       - +o_keys
       - +controller
       - +cut_filler
-      # - -screw_holes
-    pcb_shape:
+    pcb_shape_fillet:
       - type: outline
         name: pcb_shape_pure
         fillet: 5
+    pcb_shape:
+      - +pcb_shape_fillet
+      - -screw_holes
 cases:
 #  fits the key cap size, not the switches
 #  capsize:
