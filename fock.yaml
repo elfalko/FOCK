@@ -109,6 +109,10 @@ outlines:
         type: keys
         side: left
         size: 5
+    # o_keys:
+    #   - type: outline
+    #     name: o_keys_pure
+    #     fillet: 5
     top_plate_capsize:
       main: 
         type: keys
@@ -243,20 +247,12 @@ pcbs:
         outline: pcb_shape
         layer: Edge.Cuts
     footprints:
-      mcu_top:
-        type: promicro
+      mcu:
+        type: promicro_pretty
         anchor:
           ref: matrix_inner_top
           rotate: -90
           shift: [1.5*cx+0.85,-20]
-      mcu_bot:
-        type: promicro
-        params:
-          orientation: "up"
-        anchor:
-          ref: matrix_inner_top
-          rotate: -90
-          shift: [1.5*cx-0.85,-20-1.25]
 
       reset_top:
         type: button
@@ -297,123 +293,68 @@ pcbs:
           D: RAW
 #         D: RAWER with switch
 
-      resistor_1_a:
-        type: pad
+      resistor_1:
+        type: padpair
         anchor:
           ref: 
             - matrix_inner_bottom
           shift: [31.5,-6.5]
           rotate: 90
         nets:
-          net: P4
+          A: P4
+          B: RAW
         params:
-          text: "R1"
           width: 1.4
           height: 2.5
-          front: false
-      resistor_1_b:
-        type: pad
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          # +height+1
-          shift: [31.5+3.5,-6.5]
-          rotate: 90
-        nets:
-          net: RAW
-        params:
-          text: "4.7k"
-          width: 1.4
-          height: 2.5
+          distance: 1
           front: false
 
-      resistor_2_a:
-        type: pad
+      resistor_2:
+        type: padpair
         anchor:
           ref: 
             - matrix_inner_bottom
           shift: [31.5,-4]
           rotate: 90
         nets:
-          net: P3
+          A: P3
+          B: RAW
         params:
-          text: "R2"
           width: 1.4
           height: 2.5
-          front: false
-      resistor_2_b:
-        type: pad
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          # +height+1
-          shift: [31.5+3.5,-4]
-          rotate: 90
-        nets:
-          net: RAW
-        params:
-          text: "4.7k"
-          width: 1.4
-          height: 2.5
+          distance: 1
           front: false
 
-      resistor_3_a:
-        type: pad
+      resistor_3:
+        type: padpair
         anchor:
           ref: 
             - matrix_inner_bottom
           shift: [31.5,-11.75]
           rotate: 90
         nets:
-          net: P4
+          A: P4
+          B: RAW
         params:
-          text: "R1"
           width: 1.4
           height: 2.5
+          distance: 1
           back: false
 
-      resistor_3_b:
-        type: pad
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [31.5+3.5,-11.75]
-          rotate: 90
-        nets:
-          net: RAW
-        params:
-          text: "4.7k"
-          width: 1.4
-          height: 2.5
-          back: false
-
-      resistor_4_a:
-        type: pad
+      resistor_4:
+        type: padpair
         anchor:
           ref: 
             - matrix_inner_bottom
           shift: [31.5,-14.25]
           rotate: 90
         nets:
-          net: P3
+          A: P3
+          B: RAW
         params:
-          text: "R2"
           width: 1.4
           height: 2.5
-          back: false
-      resistor_4_b:
-        type: pad
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [31.5+3.5,-14.25]
-          rotate: 90
-        nets:
-          net: RAW
-        params:
-          text: "4.7k"
-          width: 1.4
-          height: 2.5
+          distance: 1
           back: false
 
 # -- CUT in V1.0
