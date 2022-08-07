@@ -9,7 +9,10 @@
 # - no batteries
 # - no USB-C :C between boards
 # TODO
+# - rotate the thumbrow 180 degrees for better routing
+# - place vias in the middle between columns and rows as necessary
 # - ask the discord
+#
 
 # V2.0 todo
 # - header for trackball
@@ -21,8 +24,13 @@ units:
   keysize: 2
   d_mh: 2.25
   fillfix: -0.8
-  ctl_x: 33.8+keysize
+  ctl_x: 34.8+keysize
   ctl_y: 50
+  trrs_x: 2*cx
+  trrs_y: -0.5*cx
+  rst_x: 1.05 * cx
+  rst_y: trrs_y
+  r_x: trrs_x - 6.5
 
 points:
   zones:
@@ -65,7 +73,6 @@ points:
             column_net: P9
             column_mark: IO
         thumb:
-          spread: cx
           origin: [cx,-0.6*cx]
           rotate: 80
           key:
@@ -205,14 +212,13 @@ outlines:
     cut_filler:
       cf1:
         type: rectangle
-        size: [3*cx,cy]
+        size: [3*cx,1.5*cy]
         anchor:
-          ref: 
-            - matrix_pinky_bottom
+          ref: matrix_pinky_bottom
           shift: [0,-0.5*cx-keysize+fillfix]
       cf2:
         type: rectangle
-        size: [2*cx,2.5*cx+keysize-fillfix]
+        size: [3*cx,2.5*cx+keysize-fillfix]
         anchor:
           ref: matrix_pinky_home
       cfe:
@@ -253,13 +259,13 @@ pcbs:
         anchor:
           ref: matrix_inner_top
           rotate: -90
-          shift: [1.5*cx+0.85,-20]
+          shift: [1.35*cx,-21.5]
 
       reset_top:
         type: button
         anchor:
           ref: matrix_inner_bottom
-          shift: [0.775*cx,0]
+          shift: [rst_x,rst_y]
           rotate: 90
         nets:
           from: RST
@@ -270,7 +276,7 @@ pcbs:
         type: button
         anchor:
           ref: matrix_inner_bottom
-          shift: [0.775*cx,0]
+          shift: [rst_x,rst_y]
           rotate: 90
         nets:
           from: RST
@@ -285,7 +291,7 @@ pcbs:
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [2.1*cx,-0.5*cx]
+          shift: [trrs_x,trrs_y]
           rotate: -90
         nets:
           A: GND
@@ -299,7 +305,7 @@ pcbs:
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [31.5,-6.5]
+          shift: [r_x,-6.5]
           rotate: 90
         nets:
           A: P4
@@ -315,7 +321,7 @@ pcbs:
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [31.5,-4]
+          shift: [r_x,-4]
           rotate: 90
         nets:
           A: P3
@@ -331,7 +337,7 @@ pcbs:
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [31.5,-11.75]
+          shift: [r_x,-11.75]
           rotate: 90
         nets:
           A: P4
@@ -347,7 +353,7 @@ pcbs:
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [31.5,-14.25]
+          shift: [r_x,-14.25]
           rotate: 90
         nets:
           A: P3
