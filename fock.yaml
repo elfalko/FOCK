@@ -4,13 +4,18 @@
 # for use with ergogen
 # https://ergogen.cache.works/
 
-# V1.0 decisions
+# V1.0
 # - no leds
 # - no batteries
 # - no USB-C :C between boards
+# V1.1 routing improbements 
+# - reordered row & col nets for simpler routing
+# - flipped thumb row keys for simpler routing
 # TODO
-# - rotate the thumbrow 180 degrees for better routing
 # - place vias in the middle between columns and rows as necessary
+# - remove silkscreen drawings
+# - add name and stuff
+# - add logo
 # - ask the discord
 #
 
@@ -39,58 +44,58 @@ points:
         outer:
           spread: cx
           key:
-            column_net: P4
+            column_net: P9
             column_mark: PO
         pinky:
           spread: cx
           key:
-            column_net: P5
+            column_net: P8
             column_mark: P
         ring:
           spread: cx+2
           stagger: cy-3
           rotate: -10
           key:
-            column_net: P6
+            column_net: P7
             column_mark: R
         middle:
           spread: cx
           stagger: cy/2
 
           key:
-            column_net: P7
+            column_net: P6
             column_mark: M
         index:
           spread: cx+0.2
           stagger: -cy/2
           rotate: -9.5
           key:
-            column_net: P8
+            column_net: P5
             column_mark: I
         inner:
           spread: cx
           key:
-            column_net: P9
+            column_net: P4
             column_mark: IO
         thumb:
           origin: [cx,-0.6*cx]
           rotate: 80
           key:
-            rotate: -90
+            rotate: 90
             column_net: P10
             column_mark: T
       rows:
         bottom:
-          row_net: P21
+          row_net: P18
           row_mark: B
         home:
-          row_net: P20
+          row_net: P19
           row_mark: H
         top:
-          row_net: P19
+          row_net: P20
           row_mark: T
         num:
-          row_net: P18
+          row_net: P21
           row_mark: N
       key:
         padding: cx
