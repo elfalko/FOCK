@@ -16,6 +16,9 @@
 # - remove silkscreen drawings
 # - add name and stuff
 # - add logo
+# - simplify footprints for ease of routing
+#   - only choc low profile
+#   - only smd diodes
 # - ask the discord
 #
 
