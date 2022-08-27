@@ -5,17 +5,21 @@
 # https://ergogen.cache.works/
 
 # V1.0
+# - keys, mcu, trrs
+# - name
+# - logo
+# - completely fucked up routing - no functionality :D
 # - no leds
 # - no batteries
 # - no USB-C :C between boards
-# V1.1 routing improbements 
+#
+# V1.1 routing improvements 
 # - reordered row & col nets for simpler routing
 # - flipped thumb row keys for simpler routing
 # TODO
+# - better switch footprint
 # - place vias in the middle between columns and rows as necessary
 # - remove silkscreen drawings
-# - add name and stuff
-# - add logo
 # - simplify footprints for ease of routing
 #   - only choc low profile
 #   - only smd diodes
@@ -105,6 +109,16 @@ points:
         spread: cy
         bind: cx * 0.6
         # quadruple combined key footprint
+
+        # footprints:
+          # choc:
+          #   type: choc_full
+          #   params:
+          #     keycaps: true
+          #   nets:
+          #     from: =column_net
+          #     to: =row_net
+
         footprints: &quad
           choc:
             type: choc
@@ -115,11 +129,46 @@ points:
             nets:
               from: =colrow
               to: =column_net
+
+          # connecting outer pads
+          trace1a:
+            type: trace
+            params:
+              points: [[-8.1,3.3],[-5.5,8],[5.5,8]]
+          via1:
+            type: via
+            anchor:
+              shift: [5.5,8]
+            nets:
+              net: =column_net
+          trace1b:
+            type: trace
+            params:
+              points: [[5.5,8],[8.1,3.3]]
+              side: "B"
+
+          # connecting inner pads
+          trace2a:
+            type: trace
+            params:
+              points: [[-3,6],[-1.75,3.75]]
+              side: "B"
+          via2:
+            type: via
+            anchor:
+              shift: [-1.75,3.75]
+            nets:
+              net: =colrow
+          trace2b:
+            type: trace
+            params:
+              points: [[-1.75,3.75],[1.75,3.75],[3,6],[6.5,6],[7.5,5],[7.5,1.11]]
+
           diode:
             type: diode
             anchor:
-              rotate: 0
-              shift: [0, -6]
+              rotate: 90
+              shift: [7.5, -2.7]
             nets:
               from: =colrow
               to: =row_net
