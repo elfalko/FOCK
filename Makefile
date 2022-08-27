@@ -5,3 +5,5 @@ all:
 route:
 	#pkill kicad 
 	kicad fock/fock.kicad_pro
+zip:
+	zip -r output/pcbs/gerber output/pcbs/gerber
