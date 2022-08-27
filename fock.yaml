@@ -16,19 +16,18 @@
 # V1.1 routing improvements 
 # - reordered row & col nets for simpler routing
 # - flipped thumb row keys for simpler routing
-# TODO
 # - better switch footprint
+# - intra-board USB-C
+# TODO
 # - place vias in the middle between columns and rows as necessary
 # - remove silkscreen drawings
-# - simplify footprints for ease of routing
-#   - only choc low profile
-#   - only smd diodes
-# - ask the discord
-#
+# - add vias below usbc for connection
+# - wire up columns
+# - add my silkscreen logo as ergogen footprint
+# - more available reset switch footprint
 
 # V2.0 todo
 # - header for trackball
-# - intra-board USB-C
 # - flipped battery connector or just flip leads in connector
 # - move switch and battery so they are better placed for 
 
@@ -40,6 +39,8 @@ units:
   ctl_y: 50
   trrs_x: 2*cx
   trrs_y: -0.5*cx
+  usbc_x: 2.05*cx
+  usbc_y: -0.5*cx
   rst_x: 1.05 * cx
   rst_y: trrs_y
   r_x: trrs_x - 6.5
@@ -108,18 +109,8 @@ points:
         padding: cx
         spread: cy
         bind: cx * 0.6
-        # quadruple combined key footprint
 
-        # footprints:
-          # choc:
-          #   type: choc_full
-          #   params:
-          #     keycaps: true
-          #   nets:
-          #     from: =column_net
-          #     to: =row_net
-
-        footprints: &quad
+        footprints: 
           choc:
             type: choc
             params:
@@ -341,85 +332,162 @@ pcbs:
         params:
           side: B
 
-      trrs:
-        type: trrs
-        params:
-          reverse: true
+      usbc_f:
+        type: usbc
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [trrs_x,trrs_y]
+          shift: [usbc_x,usbc_y]
           rotate: -90
         nets:
-          A: GND
-          B: P3
-          C: P4
-          D: RAW
-#         D: RAWER with switch
+          GND: 'GND'
+          SHIELD: 'SHIELD'
+          VBUS: 'VBUS'
+          VCC: 'RAW'
+          CC1: 'CC1'
+          CC2: 'CC2'
+          DMIN: 'DMIN'
+          DPLUS: 'DPLUS'
+          P3: 'P3'
+          P4: 'P4'
 
-      resistor_1:
-        type: padpair
+      usbc_b:
+        type: usbc
+        params:
+          side: "B"
         anchor:
           ref: 
             - matrix_inner_bottom
-          shift: [r_x,-6.5]
-          rotate: 90
+          shift: [usbc_x,usbc_y]
+          rotate: -90
         nets:
-          A: P4
-          B: RAW
-        params:
-          width: 1.4
-          height: 2.5
-          distance: 1
-          front: false
+          GND: 'GND'
+          SHIELD: 'SHIELD'
+          VBUS: 'VBUS'
+          VCC: 'RAW'
+          CC1: 'CC1'
+          CC2: 'CC2'
+          DMIN: 'DMIN'
+          DPLUS: 'DPLUS'
+          P3: 'P3'
+          P4: 'P4'
+      # resistor_1:
+      #   type: padpair
+      #   anchor:
+      #     ref: 
+      #       - matrix_inner_bottom
+      #     shift: [r_x,-6.5]
+      #     rotate: 90
+      #   nets:
+      #     A: P4
+      #     B: RAW
+      #   params:
+      #     width: 1.4
+      #     height: 2.5
+      #     distance: 1
+      #     front: false
 
-      resistor_2:
-        type: padpair
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [r_x,-4]
-          rotate: 90
-        nets:
-          A: P3
-          B: RAW
-        params:
-          width: 1.4
-          height: 2.5
-          distance: 1
-          front: false
+      # resistor_2:
+      #   type: padpair
+      #   anchor:
+      #     ref: 
+      #       - matrix_inner_bottom
+      #     shift: [r_x,-4]
+      #     rotate: 90
+      #   nets:
+      #     A: P3
+      #     B: RAW
+      #   params:
+      #     width: 1.4
+      #     height: 2.5
+      #     distance: 1
+      #     front: false
 
-      resistor_3:
-        type: padpair
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [r_x,-11.75]
-          rotate: 90
-        nets:
-          A: P4
-          B: RAW
-        params:
-          width: 1.4
-          height: 2.5
-          distance: 1
-          back: false
+      # resistor_3:
+      #   type: padpair
+      #   anchor:
+      #     ref: 
+      #       - matrix_inner_bottom
+      #     shift: [r_x,-11.75]
+      #     rotate: 90
+      #   nets:
+      #     A: P4
+      #     B: RAW
+      #   params:
+      #     width: 1.4
+      #     height: 2.5
+      #     distance: 1
+      #     back: false
 
-      resistor_4:
-        type: padpair
+      # resistor_4:
+      #   type: padpair
+      #   anchor:
+      #     ref: 
+      #       - matrix_inner_bottom
+      #     shift: [r_x,-14.25]
+      #     rotate: 90
+      #   nets:
+      #     A: P3
+      #     B: RAW
+      #   params:
+      #     width: 1.4
+      #     height: 2.5
+      #     distance: 1
+      #     back: false
+
+      # vertically connect columns
+      t_col_outer:
+        type: trace
         anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [r_x,-14.25]
-          rotate: 90
-        nets:
-          A: P3
-          B: RAW
+          ref: matrix_outer_bottom
+          shift: [-8.3,3]
         params:
-          width: 1.4
-          height: 2.5
-          distance: 1
-          back: false
+          points: [[0,0],[0,54]]
+      t_col_pinky:
+        type: trace
+        anchor:
+          ref: matrix_pinky_bottom
+          shift: [-8.3,3]
+        params:
+          points: [[0,0],[0,54]]
+      t_col_ring:
+        type: trace
+        anchor:
+          ref: matrix_ring_bottom
+          shift: [-8.3,3]
+        params:
+          points: [[0,0],[0,54]]
+      t_col_middle:
+        type: trace
+        anchor:
+          ref: matrix_middle_bottom
+          shift: [-8.3,3]
+        params:
+          points: [[0,0],[0,54]]
+      t_col_index:
+        type: trace
+        anchor:
+          ref: matrix_index_bottom
+          shift: [-8.3,3]
+        params:
+          points: [[0,0],[0,54]]
+      t_col_inner:
+        type: trace
+        anchor:
+          ref: matrix_inner_bottom
+          shift: [-8.3,3]
+        params:
+          points: [[0,0],[0,54]]
+
+      #horizontally connect columns
+      t_row_num:
+        type: trace
+        anchor:
+          ref: matrix_outer_num
+          shift: [7.5,-6.51]
+        params:
+          points: [[0,0],[18,0],[19.7,13]]
+          side: "B"
 
 # -- CUT in V1.0
 # battery and switch
