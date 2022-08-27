@@ -163,6 +163,172 @@ points:
             nets:
               from: =colrow
               to: =row_net
+    # get anchor for connector
+    connector:
+      anchor:
+        ref: 
+          - matrix_inner_bottom
+        shift: [usbc_x,usbc_y]
+      columns:
+        usbcc:
+      rows:
+        usbcr:
+      key:
+        footprints:
+          usbc_f:
+            type: usbc
+            anchor:
+              ref: 
+                - matrix_inner_bottom
+              shift: [usbc_x,usbc_y]
+              rotate: -90
+            nets:
+              GND: 'GND'
+              SHIELD: 'SHIELD'
+              VBUS: 'VBUS'
+              VCC: 'RAW'
+              CC1: 'CC1'
+              CC2: 'CC2'
+              DMIN: 'DMIN'
+              DPLUS: 'DPLUS'
+              P3: 'P3'
+              P4: 'P4'
+          usbc_b:
+            type: usbc
+            params:
+              side: "B"
+            anchor:
+              ref: 
+                - matrix_inner_bottom
+              shift: [usbc_x,usbc_y]
+              rotate: -90
+            nets:
+              GND: 'GND'
+              SHIELD: 'SHIELD'
+              VBUS: 'VBUS'
+              VCC: 'RAW'
+              CC1: 'CC1'
+              CC2: 'CC2'
+              DMIN: 'DMIN'
+              DPLUS: 'DPLUS'
+              P3: 'P3'
+              P4: 'P4'
+          # flippable DMIN
+          via_dmin:
+            type: via
+            anchor:
+              shift: [-6,0]
+            nets:
+              net: 'DMIN'
+            params:
+              d: 0.2
+          trace_dmin_f:
+            type: trace
+            params:
+              points: [[-7,0.25],[-6.25,0.25],[-6,0],[-6,-0.5],[-6.25,-0.75],[-7,-0.75]]
+          # connecting inner pads
+          trace_dmin_b:
+            type: trace
+            params:
+              points: [[-7,-0.25],[-6.25,-0.25],[-6,0],[-6,0.5],[-6.25,0.75],[-7,0.75]]
+              side: "B"
+          # flippable DPLUS
+          via_dplus:
+            type: via
+            anchor:
+              shift: [-5,0]
+            nets:
+              net: 'DPLUS'
+            params:
+              d: 0.2
+          trace_dplus_f:
+            type: trace
+            params:
+              points: [[-5,0],[-5,0.5],[-5.25,0.75],[-7,0.75],[-8,0.75],[-8.25,0.5],[-8.25,0],[-8,-0.25],[-7,-0.25]]
+          # connecting inner pads
+          trace_dplus_b:
+            type: trace
+            params:
+              points: [[-5,0],[-5,-0.5],[-5.25,-0.75],[-7,-0.75],[-8,-0.75],[-8.25,-0.5],[-8.25,0],[-8,0.25],[-7,0.25]]
+              side: "B"
+
+          # flippable CC2
+          via_cc2:
+            type: via
+            anchor:
+              shift: [-4,0]
+            nets:
+              net: 'CC2'
+            params:
+              d: 0.2
+          trace_cc2_f:
+            type: trace
+            params:
+              points: [[-7,-1.25],[-4.5,-1.25],[-4,-0.75],[-4,0]]
+          trace_cc2_b:
+            type: trace
+            params:
+              points: [[-7,1.25],[-4.5,1.25],[-4,0.75],[-4,0]]
+              side: "B"
+
+          # flippable SBU1
+          via_sbu1:
+            type: via
+            anchor:
+              shift: [-3,0]
+            nets:
+              net: 'sbu1'
+            params:
+              d: 0.2
+          trace_sbu1_f:
+            type: trace
+            params:
+              points: [[-7,1.25],[-3.5,1.25],[-3,0.75],[-3,0]]
+          trace_sbu1_b:
+            type: trace
+            params:
+              points: [[-7,-1.25],[-3.5,-1.25],[-3,-0.75],[-3,0]]
+              side: "B"
+
+          # flippable SBU2
+          via_sbu2:
+            type: via
+            anchor:
+              shift: [-2,0]
+            nets:
+              net: 'sbu2'
+            params:
+              d: 0.2
+          trace_sbu2_f:
+            type: trace
+            params:
+              points: [[-7,-1.75],[-2.75,-1.75],[-2,-1],[-2,0]]
+          trace_sbu2_b:
+            type: trace
+            params:
+              points: [[-7,1.75],[-2.75,1.75],[-2,1],[-2,0]]
+              side: "B"
+
+          # flippable CC1
+          via_cc1:
+            type: via
+            anchor:
+              shift: [-1,0]
+            nets:
+              net: 'cc1'
+            params:
+              d: 0.2
+          trace_cc1_f:
+            type: trace
+            params:
+              points: [[-7,1.75],[-1.75,1.75],[-1,1],[-1,0]]
+          # connecting inner pads
+          trace_cc1_b:
+            type: trace
+            params:
+              points: [[-7,-1.75],[-1.75,-1.75],[-1,-1],[-1,0]]
+              side: "B"
+
 outlines:
   exports:
     o_keys:
@@ -332,45 +498,6 @@ pcbs:
         params:
           side: B
 
-      usbc_f:
-        type: usbc
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [usbc_x,usbc_y]
-          rotate: -90
-        nets:
-          GND: 'GND'
-          SHIELD: 'SHIELD'
-          VBUS: 'VBUS'
-          VCC: 'RAW'
-          CC1: 'CC1'
-          CC2: 'CC2'
-          DMIN: 'DMIN'
-          DPLUS: 'DPLUS'
-          P3: 'P3'
-          P4: 'P4'
-
-      usbc_b:
-        type: usbc
-        params:
-          side: "B"
-        anchor:
-          ref: 
-            - matrix_inner_bottom
-          shift: [usbc_x,usbc_y]
-          rotate: -90
-        nets:
-          GND: 'GND'
-          SHIELD: 'SHIELD'
-          VBUS: 'VBUS'
-          VCC: 'RAW'
-          CC1: 'CC1'
-          CC2: 'CC2'
-          DMIN: 'DMIN'
-          DPLUS: 'DPLUS'
-          P3: 'P3'
-          P4: 'P4'
       # resistor_1:
       #   type: padpair
       #   anchor:
@@ -478,40 +605,186 @@ pcbs:
           shift: [-8.3,3]
         params:
           points: [[0,0],[0,54]]
+      t_col_thumb:
+        type: trace
+        anchor:
+          ref: matrix_thumb_bottom
+          shift: [5.5,8]
+        params:
+          points: [[0,0],[54,0]]
 
       #horizontally connect columns
-      t_row_num:
+      #num
+      t_row_num_pinky:
         type: trace
         anchor:
           ref: matrix_outer_num
           shift: [6,-6.6]
         params:
-          points: [[0,0],[23,0],[30.8,15],[46.3,12.3],[53,20.2],[65.6,17.6],[89.5,3],[106.5,-3]]
+          points: [[43,-58],[-2,-58],[-4,-56],[-4,-2],[-2,0],[22,0]]
           side: "B"
-      t_row_top:
+      t_row_num_ring:
+        type: trace
+        anchor:
+          ref: matrix_ring_num
+          shift: [-10,-6.6]
+        params:
+          points: [[0,-8.5],[0,-2],[2,0],[18,0],[20,2]]
+          side: "B"
+      t_row_num_middle:
+        type: trace
+        anchor:
+          ref: matrix_middle_num
+          shift: [-7,-6.6]
+        params:
+          points: [[-1,-2],[1,0],[17,0]]
+          side: "B"
+      t_row_num_index:
+        type: trace
+        anchor:
+          ref: matrix_index_num
+          shift: [-10,-6.6]
+        params:
+          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-17.5]]
+          side: "B"
+
+      #top
+      t_row_top_pinky:
         type: trace
         anchor:
           ref: matrix_outer_top
           shift: [6,-6.6]
         params:
-          points: [[0,0],[23,0],[28.5,15.3],[42.8,13],[51.1,20.2],[61.9,17.9],[83.7,4],[100.35,-2.35]]
+          points: [[33.5,-39.5],[-1.75,-39.5],[-3.5,-37.75],[-3.5,-2],[-1.5,0],[22,0]]
           side: "B"
-      t_row_home:
+      t_row_top_ring:
+        type: trace
+        anchor:
+          ref: matrix_ring_top
+          shift: [-10,-6.6]
+        params:
+          points: [[0,-12],[0,-2],[2,0],[18,0],[20,2]]
+          side: "B"
+      t_row_top_middle:
+        type: trace
+        anchor:
+          ref: matrix_middle_top
+          shift: [-7,-6.6]
+        params:
+          points: [[-1,-2],[1,0],[17,0]]
+          side: "B"
+      t_row_top_index:
+        type: trace
+        anchor:
+          ref: matrix_index_top
+          shift: [-10,-6.6]
+        params:
+          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-14.5]]
+          side: "B"
+
+      #home
+      t_row_home_pinky:
         type: trace
         anchor:
           ref: matrix_outer_home
           shift: [6,-6.6]
         params:
-          points: [[0,0],[18,0],[28,15.5],[40.4,12.7],[49.15,20.25],[60,18],[77.7,5.1],[94,-0.7]]
+          points: [[33.25,-21],[-1.5,-21],[-3,-19.5],[-3,-2],[-1,0],[20,0]]
           side: "B"
-      t_row_bot:
+      t_row_home_ring:
+        type: trace
+        anchor:
+          ref: matrix_ring_home
+          shift: [-10,-6.6]
+        params:
+          points: [[0,-14.25],[0,-2],[2,0],[18,0],[20,2]]
+          side: "B"
+      t_row_home_middle:
+        type: trace
+        anchor:
+          ref: matrix_middle_home
+          shift: [-7,-6.6]
+        params:
+          points: [[-1,-2],[1,0],[17,0]]
+          side: "B"
+      t_row_home_index:
+        type: trace
+        anchor:
+          ref: matrix_index_home
+          shift: [-10,-6.6]
+        params:
+          points: [[2,0],[37,0],[38.5,1.5]]
+          side: "B"
+
+      #bottom
+      t_row_bottom_pinky:
         type: trace
         anchor:
           ref: matrix_outer_bottom
           shift: [6,-6.6]
         params:
-          points: [[0,0],[18,0],[36.5,12.8],[56.14,18.5],[70.6,6.7],[87.3,0.9]]
+          points: [[0,0],[21,0]]
           side: "B"
+      t_row_bottom_ring:
+        type: trace
+        anchor:
+          ref: matrix_ring_bottom
+          shift: [-10,-6.6]
+        params:
+          points: [[5,-13],[5,-2],[7,0],[18,0],[20,2]]
+          side: "B"
+      t_row_bottom_middle:
+        type: trace
+        anchor:
+          ref: matrix_middle_bottom
+          shift: [-7,-6.6]
+        params:
+          points: [[-1,-2],[1,0],[15,0]]
+          side: "B"
+      t_row_bottom_index:
+        type: trace
+        anchor:
+          ref: matrix_index_bottom
+          shift: [-10,-6.6]
+        params:
+          points: [[7,0],[37,0],[38.5,1.5],[38.5,14.5]]
+          side: "B"
+
+      # connections from thumb row
+      t_row_bottom_thumb:
+        type: trace
+        anchor:
+          ref: matrix_thumb_bottom
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[8,0],[10,-2],[10,-8]]
+          side: "B"
+      t_row_home_thumb:
+        type: trace
+        anchor:
+          ref: matrix_thumb_home
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[2.5,-2.5],[39,-2.5],[41.5,0],[41.5,16]]
+          side: "B"
+      t_row_top_thumb:
+        type: trace
+        anchor:
+          ref: matrix_thumb_top
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[2,-2],[21,-2],[23,0],[23,16]]
+          side: "B"
+      t_row_num_thumb:
+        type: trace
+        anchor:
+          ref: matrix_thumb_num
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[-3,3],[-3,14]]
+          side: "B"
+
+
 
 # -- CUT in V1.0
 # battery and switch
