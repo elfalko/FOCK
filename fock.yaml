@@ -158,8 +158,8 @@ points:
           diode:
             type: diode
             anchor:
-              rotate: 90
-              shift: [7.5, -2.7]
+              rotate: 80
+              shift: [6.8, -2.8]
             nets:
               from: =colrow
               to: =row_net
@@ -484,9 +484,33 @@ pcbs:
         type: trace
         anchor:
           ref: matrix_outer_num
-          shift: [7.5,-6.51]
+          shift: [6,-6.6]
         params:
-          points: [[0,0],[18,0],[19.7,13]]
+          points: [[0,0],[23,0],[30.8,15],[46.3,12.3],[53,20.2],[65.6,17.6],[89.5,3],[106.5,-3]]
+          side: "B"
+      t_row_top:
+        type: trace
+        anchor:
+          ref: matrix_outer_top
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[23,0],[28.5,15.3],[42.8,13],[51.1,20.2],[61.9,17.9],[83.7,4],[100.35,-2.35]]
+          side: "B"
+      t_row_home:
+        type: trace
+        anchor:
+          ref: matrix_outer_home
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[18,0],[28,15.5],[40.4,12.7],[49.15,20.25],[60,18],[77.7,5.1],[94,-0.7]]
+          side: "B"
+      t_row_bot:
+        type: trace
+        anchor:
+          ref: matrix_outer_bottom
+          shift: [6,-6.6]
+        params:
+          points: [[0,0],[18,0],[36.5,12.8],[56.14,18.5],[70.6,6.7],[87.3,0.9]]
           side: "B"
 
 # -- CUT in V1.0
