@@ -34,7 +34,7 @@
 
 units:
   keysize: 2
-  d_mh: 2.25
+  r_mh: 1.55
   fillfix: -0.8
   ctl_x: 34.8+keysize
   ctl_y: 50
@@ -208,49 +208,49 @@ outlines:
           - matrix_pinky_bottom
           - matrix_thumb_num
           shift: [0, 0]
-        radius: d_mh
+        radius: r_mh
       m_2:
         type: circle
         anchor:
           ref: 
           - matrix_pinky_num
           - matrix_ring_num
-        radius: d_mh
+        radius: r_mh
       m_3:
         type: circle
         anchor:
           ref: 
           - matrix_index_num
           - matrix_middle_num
-        radius: d_mh
+        radius: r_mh
       m_4:
         type: circle
         anchor:
           ref: 
           - matrix_inner_bottom
           - matrix_thumb_bottom
-        radius: d_mh
+        radius: r_mh
       m_5:
         type: circle
         anchor:
           ref: 
           - matrix_outer_bottom
           - matrix_pinky_home
-        radius: d_mh
+        radius: r_mh
       m_6:
         type: circle
         anchor:
           ref: 
           - matrix_outer_num
           - matrix_pinky_top
-        radius: d_mh
+        radius: r_mh
       m_7:
         type: circle
         anchor:
           ref: 
           - matrix_index_num
           - matrix_inner_top
-        radius: d_mh
+        radius: r_mh
     screw_holes:
       $extends: outlines.exports.mounting_holes
       m_5:
