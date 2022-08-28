@@ -213,6 +213,7 @@ points:
               DPLUS: 'DPLUS'
               P3: 'P3'
               P4: 'P4'
+
           # flippable DMIN
           via_dmin:
             type: via
@@ -226,12 +227,12 @@ points:
             type: trace
             params:
               points: [[-7,0.25],[-6.25,0.25],[-6,0],[-6,-0.5],[-6.25,-0.75],[-7,-0.75]]
-          # connecting inner pads
           trace_dmin_b:
             type: trace
             params:
               points: [[-7,-0.25],[-6.25,-0.25],[-6,0],[-6,0.5],[-6.25,0.75],[-7,0.75]]
               side: "B"
+
           # flippable DPLUS
           via_dplus:
             type: via
@@ -277,7 +278,7 @@ points:
             anchor:
               shift: [-3,0]
             nets:
-              net: 'sbu1'
+              net: 'SBU1'
             params:
               d: 0.2
           trace_sbu1_f:
@@ -290,13 +291,13 @@ points:
               points: [[-7,-1.25],[-3.5,-1.25],[-3,-0.75],[-3,0]]
               side: "B"
 
-          # flippable SBU2
+          # flippable sbu2
           via_sbu2:
             type: via
             anchor:
               shift: [-2,0]
             nets:
-              net: 'sbu2'
+              net: 'SBU2'
             params:
               d: 0.2
           trace_sbu2_f:
@@ -309,24 +310,86 @@ points:
               points: [[-7,1.75],[-2.75,1.75],[-2,1],[-2,0]]
               side: "B"
 
-          # flippable CC1
+          # flippable cc1
           via_cc1:
             type: via
             anchor:
               shift: [-1,0]
             nets:
-              net: 'cc1'
+              net: 'CC1'
             params:
               d: 0.2
           trace_cc1_f:
             type: trace
             params:
               points: [[-7,1.75],[-1.75,1.75],[-1,1],[-1,0]]
-          # connecting inner pads
           trace_cc1_b:
             type: trace
             params:
               points: [[-7,-1.75],[-1.75,-1.75],[-1,-1],[-1,0]]
+              side: "B"
+
+          # flippable vbus
+          via_vbus_1:
+            type: via
+            anchor:
+              shift: [-6,2.5]
+            nets:
+              net: 'VBUS'
+            params:
+              d: 0.2
+          via_vbus_2:
+            type: via
+            anchor:
+              shift: [-6,-2.5]
+            nets:
+              net: 'VBUS'
+            params:
+              d: 0.2
+          trace_vbus_f:
+            type: trace
+            params:
+              points: [[-7,2.5],[-1.75,2.5],[-0.5,1],[-0.5,-1],[-1.75,-2.5],[-7,-2.5]]
+          trace_vbus_b1:
+            type: trace
+            params:
+              points: [[-7,2.5],[-6,2.5]]
+              side: "B"
+          trace_vbus_b2:
+            type: trace
+            params:
+              points: [[-7,-2.5],[-6,-2.5]]
+              side: "B"
+
+          # flippable GND
+          via_gnd_1:
+            type: via
+            anchor:
+              shift: [-5,3.25]
+            nets:
+              net: 'GND'
+            params:
+              d: 0.2
+          via_gnd_2:
+            type: via
+            anchor:
+              shift: [-5,-3.25]
+            nets:
+              net: 'GND'
+            params:
+              d: 0.2
+          trace_gnd_f1:
+            type: trace
+            params:
+              points: [[-7,3.25],[-5,3.25]]
+          trace_gnd_f2:
+            type: trace
+            params:
+              points: [[-7,-3.25],[-5,-3.25]]
+          trace_gnd_b:
+            type: trace
+            params:
+              points: [[-7,3.25],[-1.75,3.25],[-0.5,2],[-0.5,-2],[-1.75,-3.25],[-7,-3.25]]
               side: "B"
 
 outlines:
@@ -506,8 +569,8 @@ pcbs:
       #     shift: [r_x,-6.5]
       #     rotate: 90
       #   nets:
-      #     A: P4
-      #     B: RAW
+      #     a: P4
+      #     b: RAW
       #   params:
       #     width: 1.4
       #     height: 2.5
@@ -522,8 +585,8 @@ pcbs:
       #     shift: [r_x,-4]
       #     rotate: 90
       #   nets:
-      #     A: P3
-      #     B: RAW
+      #     a: P3
+      #     b: RAW
       #   params:
       #     width: 1.4
       #     height: 2.5
@@ -538,8 +601,8 @@ pcbs:
       #     shift: [r_x,-11.75]
       #     rotate: 90
       #   nets:
-      #     A: P4
-      #     B: RAW
+      #     a: P4
+      #     b: RAW
       #   params:
       #     width: 1.4
       #     height: 2.5
@@ -554,8 +617,8 @@ pcbs:
       #     shift: [r_x,-14.25]
       #     rotate: 90
       #   nets:
-      #     A: P3
-      #     B: RAW
+      #     a: P3
+      #     b: RAW
       #   params:
       #     width: 1.4
       #     height: 2.5
@@ -786,7 +849,7 @@ pcbs:
 
 
 
-# -- CUT in V1.0
+# -- cut in v1.0
 # battery and switch
 # oled support
 # 
@@ -808,19 +871,19 @@ pcbs:
 #      i2cheader_top:
 #        type: oled
 #        nets:
-#          A: GND
-#          B: P14
-#          C: P15
-#          D: RAWER
+#          a: GND
+#          b: P14
+#          c: P15
+#          d: RAWER
 #        params:
-#          side: F
+#          side: f
 #        anchor:
 #          ref: 
 #            - matrix_inner_bottom
 #          shift: [1.5*cx,-0.5*cx]
 #          rotate: 0
 
-#      powerswitch_B:
+#      powerswitch_b:
 #        type: slider
 #        anchor:
 #          ref: 
@@ -832,8 +895,8 @@ pcbs:
 #          from: RAW
 #          to: RAWER
 #        params:
-#          side: B
-#      powerswitch_F:
+#          side: b
+#      powerswitch_f:
 #        type: slider
 #        anchor:
 #          ref: 
@@ -845,4 +908,4 @@ pcbs:
 #          from: RAW
 #          to: RAWER
 #        params:
-#          side: F
+#          side: f
