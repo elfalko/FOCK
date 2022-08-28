@@ -295,7 +295,7 @@ points:
           via_sbu2:
             type: via
             anchor:
-              shift: [-2,0]
+              shift: [-2.35,-1]
             nets:
               net: 'SBU2'
             params:
@@ -303,18 +303,18 @@ points:
           trace_sbu2_f:
             type: trace
             params:
-              points: [[-7,-1.75],[-2.75,-1.75],[-2,-1],[-2,0]]
+              points: [[-7,-1.75],[-3.1,-1.75],[-2.35,-1]]
           trace_sbu2_b:
             type: trace
             params:
-              points: [[-7,1.75],[-2.75,1.75],[-2,1],[-2,0]]
+              points: [[-7,1.75],[-3.1,1.75],[-2.35,1],[-2.35,-1]]
               side: "B"
 
           # flippable cc1
           via_cc1:
             type: via
             anchor:
-              shift: [-1,0]
+              shift: [-1.65,1.3]
             nets:
               net: 'CC1'
             params:
@@ -322,11 +322,11 @@ points:
           trace_cc1_f:
             type: trace
             params:
-              points: [[-7,1.75],[-1.75,1.75],[-1,1],[-1,0]]
+              points: [[-7,1.75],[-2.1,1.75],[-1.65,1.3]]
           trace_cc1_b:
             type: trace
             params:
-              points: [[-7,-1.75],[-1.75,-1.75],[-1,-1],[-1,0]]
+              points: [[-7,-1.75],[-2.1,-1.75],[-1.65,-1.3],[-1.65,1.3]]
               side: "B"
 
           # flippable vbus
@@ -349,7 +349,7 @@ points:
           trace_vbus_f:
             type: trace
             params:
-              points: [[-7,2.5],[-1.75,2.5],[-0.5,1],[-0.5,-1],[-1.75,-2.5],[-7,-2.5]]
+              points: [[-7,2.5],[-1.75,2.5],[-1,1.75],[-1,-1.75],[-1.75,-2.5],[-7,-2.5]]
           trace_vbus_b1:
             type: trace
             params:
@@ -389,7 +389,7 @@ points:
           trace_gnd_b:
             type: trace
             params:
-              points: [[-7,3.25],[-1.75,3.25],[-0.5,2],[-0.5,-2],[-1.75,-3.25],[-7,-3.25]]
+              points: [[-7,3.25],[-1.75,3.25],[-1,2.5],[-1,-2.5],[-1.75,-3.25],[-7,-3.25]]
               side: "B"
 
 outlines:
