@@ -163,7 +163,17 @@ points:
             nets:
               from: =colrow
               to: =row_net
-    # get anchor for connector
+    # anchor for mcu
+    mcu:
+      anchor:
+        ref: matrix_inner_top
+        shift: [1.35*cx,-21.5]
+      columns:
+        mcuc:
+      rows:
+        mcur:
+      
+    # anchor for connector
     connector:
       anchor:
         ref: 
@@ -173,6 +183,7 @@ points:
         usbcc:
       rows:
         usbcr:
+
       key:
         footprints:
           usbc_f:
@@ -183,16 +194,9 @@ points:
               shift: [usbc_x,usbc_y]
               rotate: -90
             nets:
-              GND: 'GND'
-              SHIELD: 'SHIELD'
-              VBUS: 'VBUS'
               VCC: 'RAW'
-              CC1: 'CC1'
-              CC2: 'CC2'
               DMIN: 'DMIN'
               DPLUS: 'DPLUS'
-              P3: 'P3'
-              P4: 'P4'
           usbc_b:
             type: usbc
             params:
@@ -203,16 +207,9 @@ points:
               shift: [usbc_x,usbc_y]
               rotate: -90
             nets:
-              GND: 'GND'
-              SHIELD: 'SHIELD'
-              VBUS: 'VBUS'
               VCC: 'RAW'
-              CC1: 'CC1'
-              CC2: 'CC2'
               DMIN: 'DMIN'
               DPLUS: 'DPLUS'
-              P3: 'P3'
-              P4: 'P4'
 
           # flippable DMIN
           via_dmin:
@@ -534,9 +531,8 @@ pcbs:
       mcu:
         type: promicro_pretty
         anchor:
-          ref: matrix_inner_top
+          ref: mcu_mcuc_mcur
           rotate: -90
-          shift: [1.35*cx,-21.5]
 
       reset_top:
         type: button
