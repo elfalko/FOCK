@@ -39,13 +39,17 @@ units:
   usbc_y: -0.5*cx
   rst_x: 1.05 * cx
   rst_y: trrs_y
-  r_x: trrs_x - 6.5
   pcol_x: 2
   pcol_y: -9
   via1_x: 5.5
   via1_y: 8
   via2_x: -1.75
   via2_y: 3.75
+  rpu_x: -11
+  rpu_y: 1.5
+  mcuip_x: 2.762
+  mcuip_y: 2.54
+
 
 points:
   zones:
@@ -196,9 +200,9 @@ points:
               shift: [usbc_x,usbc_y]
               rotate: -90
             nets:
-              VCC: 'RAW'
-              DMIN: 'P3'
-              DPLUS: 'P4'
+              VBUS: 'RAW'
+              DMIN: 'P2'
+              DPLUS: 'P3'
           usbc_b:
             type: usbc
             params:
@@ -209,9 +213,9 @@ points:
               shift: [usbc_x,usbc_y]
               rotate: -90
             nets:
-              VCC: 'RAW'
-              DMIN: 'P3'
-              DPLUS: 'P4'
+              VBUS: 'RAW'
+              DMIN: 'P2'
+              DPLUS: 'P3'
 
           # flippable DMIN
           via_dmin:
@@ -219,7 +223,7 @@ points:
             anchor:
               shift: [-6,0]
             nets:
-              net: 'DMIN'
+              net: 'P2'
             params:
               d: 0.2
           trace_dmin_f:
@@ -238,7 +242,7 @@ points:
             anchor:
               shift: [-5,0]
             nets:
-              net: 'DPLUS'
+              net: 'P3'
             params:
               d: 0.2
           trace_dplus_f:
@@ -334,7 +338,7 @@ points:
             anchor:
               shift: [-6,2.5]
             nets:
-              net: 'VBUS'
+              net: 'RAW'
             params:
               d: 0.2
           via_vbus_2:
@@ -342,7 +346,7 @@ points:
             anchor:
               shift: [-6,-2.5]
             nets:
-              net: 'VBUS'
+              net: 'RAW'
             params:
               d: 0.2
           trace_vbus_f:
@@ -555,37 +559,56 @@ pcbs:
           from: RST
           to: GND
           
-      # resistor_1:
-      #   type: padpair
-      #   anchor:
-      #     ref: 
-      #       - matrix_inner_bottom
-      #     shift: [r_x,-6.5]
-      #     rotate: 90
-      #   nets:
-      #     a: P4
-      #     b: RAW
-      #   params:
-      #     width: 1.4
-      #     height: 2.5
-      #     distance: 1
-      #     front: false
+      pullup_p2:
+        type: padpair
+        anchor:
+          ref: connector_c_r
+          shift: [rpu_x,rpu_y]
+          rotate: 180
+        nets:
+          A: RAW
+          B: P2
+        params:
+          text: "4k7"
 
-      # resistor_2:
-      #   type: padpair
-      #   anchor:
-      #     ref: 
-      #       - matrix_inner_bottom
-      #     shift: [r_x,-4]
-      #     rotate: 90
-      #   nets:
-      #     a: P3
-      #     b: RAW
-      #   params:
-      #     width: 1.4
-      #     height: 2.5
-      #     distance: 1
-      #     front: false
+      pullup_p3:
+        type: padpair
+        anchor:
+          ref: connector_c_r
+          shift: [rpu_x,-rpu_y]
+          rotate: 180
+        nets:
+          A: RAW
+          B: P3
+        params:
+          text: "4k7"
+
+      t_p2_pu:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [rpu_x+2.3,rpu_y]
+        params:
+          points: [[0,0],[0.75,-0.75],[2,-0.75]]
+          side: "B"
+      t_p3_pu:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [rpu_x+2.3,-rpu_y]
+        params:
+          points: [[0,0],[0.75,0.75],[2,0.75]]
+          side: "B"
+      t_raw_pu:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [rpu_x-2.3,rpu_y]
+        params:
+          points: [[0,0],[0,-3.5],[0.5,-4],[6,-4]]
+          side: "B"
+
+
 
       # vertically connect columns
       t_col_outer:
@@ -670,7 +693,7 @@ pcbs:
           ref: matrix_index_num
           shift: [-10,-6.6]
         params:
-          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-17.5]]
+          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-18.75],[39,-19.25],[39,-27],[40,-28],[48,-28],[48.25,-28.25]]
           side: "B"
 
       #top
@@ -704,7 +727,7 @@ pcbs:
           ref: matrix_index_top
           shift: [-10,-6.6]
         params:
-          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-14.5]]
+          points: [[0,0],[37,0],[38.5,-1.5],[38.5,-12.1],[39,-12.6],[48.25,-12.6],[48.5,-12.85]]
           side: "B"
 
       #home
@@ -740,6 +763,14 @@ pcbs:
         params:
           points: [[2,0],[35,0]]
           side: "B"
+      t_row_home_in:
+        type: trace
+        anchor:
+          ref: matrix_inner_home
+          shift: [6.6,-6.6]
+        params:
+          points: [[0,0],[0.5,0.5],[19.25,0.5],[20.5,1.75]]
+
 
       #bottom
       t_row_bottom_pinky:
@@ -772,8 +803,24 @@ pcbs:
           ref: matrix_index_bottom
           shift: [-10,-6.6]
         params:
-          points: [[7,0],[37,0],[38.5,1.5],[38.5,14.5]]
+          points: [[7,0],[37,0],[38.5,1.5],[38.5,15]]
           side: "B"
+      v_row_bottom:
+        type: via
+        anchor:
+          ref: matrix_index_bottom
+          shift: [28.5,8.4]
+        nets:
+          net: "P18"
+        params:
+          d: 0.2
+      t_row_bottom_in:
+        type: trace
+        anchor:
+          ref: matrix_index_bottom
+          shift: [28.5,8.4]
+        params:
+          points: [[0,0],[1,1],[15.5,1],[16.75,2.25]]
 
       # connections from thumb row
       t_row_bottom_thumb:
@@ -782,7 +829,7 @@ pcbs:
           ref: matrix_thumb_bottom
           shift: [6,-6.6]
         params:
-          points: [[0,0],[8,0],[10,-2],[10,-8]]
+          points: [[0,0],[8,0],[10,-2],[10,-9],[11.6,-10.6]]
           side: "B"
       t_row_home_thumb:
         type: trace
@@ -819,7 +866,6 @@ pcbs:
           width: 1
           height: 0.25
           back: false
-          text: "CO"
         nets:
           net: 'P9'
       t_col_outer_mid:
@@ -829,6 +875,15 @@ pcbs:
           shift: [pcol_x,pcol_y]
         params:
           points: [[0,0],[2.5*cx-2.25,0],[2.5*cx-0.5,1.75],[2.5*cx-0.5,19]]
+      t_col_outer_in:
+        type: trace
+        anchor:
+          ref: mcu_c_r
+          shift: [-mcuip_x,-2.5*mcuip_y]
+        params:
+          # points: [[0,0],[-1.25,-1.25],[-10,-1.25],[-10.75,-2],[-10.75,-17.9],[-15.75,-21.08]]
+          points: [[0,0],[-1.25,-1.25],[-10,-1.25],[-10.75,-2],[-10.75,-17.9]]
+
 
       p_col_pinky:
         type: pad
@@ -839,7 +894,6 @@ pcbs:
           width: 1
           height: 0.25
           back: false
-          text: "CP"
         nets:
           net: 'P8'
       t_col_pinky_mid:
@@ -849,6 +903,14 @@ pcbs:
           shift: [pcol_x,pcol_y-0.5]
         params:
           points: [[0,0],[2.5*cx-2,0],[2.5*cx,2],[2.5*cx,19]]
+      t_col_pinky_in:
+        type: trace
+        anchor:
+          ref: mcu_c_r
+          shift: [-mcuip_x,-3.5*mcuip_y]
+        params:
+          # points: [[0,0],[-1.25,-1.25],[-9.5,-1.25],[-10.25,-2],[-10.25,-15.6],[-15.4,-18.88]]
+          points: [[0,0],[-1.25,-1.25],[-9.5,-1.25],[-10.25,-2],[-10.25,-15.6]]
 
       p_col_ring:
         type: pad
@@ -859,7 +921,6 @@ pcbs:
           width: 1
           height: 0.25
           back: false
-          text: "CR"
         nets:
           net: 'P7'
       t_col_ring_mid:
@@ -876,6 +937,14 @@ pcbs:
           shift: [via1_x, via1_y]
         params:
           points: [[0,0],[2,0],[3.5,-1.5],[3.5,-7]]
+      t_col_ring_in:
+        type: trace
+        anchor:
+          ref: mcu_c_r
+          shift: [-mcuip_x,-4.5*mcuip_y]
+        params:
+          # points: [[0,0],[-1.25,-1.25],[-9,-1.25],[-9.75,-2],[-9.75,-13.3],[-15.15,-16.76]]
+          points: [[0,0],[-1.25,-1.25],[-9,-1.25],[-9.75,-2],[-9.75,-13.3]]
 
       p_col_middle:
         type: pad
@@ -886,7 +955,6 @@ pcbs:
           width: 1
           height: 0.25
           back: false
-          text: "CM"
         nets:
           net: 'P6'
       t_col_middle_mid:
@@ -896,6 +964,14 @@ pcbs:
           shift: [pcol_x,pcol_y-1.5]
         params:
           points: [[0,0],[2.5*cx+4,0]]
+      t_col_middle_in:
+        type: trace
+        anchor:
+          ref: mcu_c_r
+          shift: [-mcuip_x,-5.5*mcuip_y]
+        params:
+          # points: [[0,0],[-1.25,-1.25],[-8.5,-1.25],[-9.25,-2],[-9.25,-11],[-14.9,-14.64]]
+          points: [[0,0],[-1.25,-1.25],[-8.5,-1.25],[-9.25,-2],[-9.25,-11]]
 
 
       t_col_index_out:
@@ -924,7 +1000,8 @@ pcbs:
 
 
 
-      t_row_home_out:
+
+      t_col_inner_out:
         type: trace
         anchor:
           ref: matrix_inner_home
@@ -950,12 +1027,26 @@ pcbs:
           points: [[0,0],[0,-11.5],[1.5,-13],[29.5,-13]]
 
       # connect usb-c
+      t_p2:
+        type: trace
+        anchor:
+          ref: mcu_c_r
+          shift: [-mcuip_x,1.5*mcuip_y]
+        params:
+          points: [[0,0],[1,-1],[12,-1],[12.5,-1.5],[12.5,-19.5],[12,-20],[7,-20],[6.5,-20.5],[6.5,-25.75]]
       t_p3:
         type: trace
         anchor:
           ref: mcu_c_r
         params:
-          points: [[-2.762,1.27,],[0,0],[9,0],[9.2,-0.2],[9.2,-15.2],[9,-15.4],[4,-15.4],[3.8,-15.6]]
+          points: [[-2.762,1.27],[-1.492,0],[9,0],[9.2,-0.2],[9.2,-15.2],[9,-15.4],[4,-15.4],[1.5,-17.9],[1.5,-23.75],[3,-25.25]]
+      t_gnd:
+        type: trace
+        anchor:
+          ref: connector_c_r
+        params:
+          points: [[-7,-3.25],[-16.5,-3.25]]
+          side: "B"
 
 
 
