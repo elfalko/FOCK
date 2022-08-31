@@ -863,7 +863,7 @@ pcbs:
           ref: matrix_thumb_home
           shift: [pcol_x,pcol_y]
         params: 
-          width: 1
+          width: 0.25 
           height: 0.25
           back: false
         nets:
@@ -891,7 +891,7 @@ pcbs:
           ref: matrix_thumb_home
           shift: [pcol_x,pcol_y-0.5]
         params: 
-          width: 1
+          width: 0.25 
           height: 0.25
           back: false
         nets:
@@ -918,7 +918,7 @@ pcbs:
           ref: matrix_thumb_home
           shift: [pcol_x,pcol_y-1]
         params: 
-          width: 1
+          width: 0.25
           height: 0.25
           back: false
         nets:
@@ -952,7 +952,7 @@ pcbs:
           ref: matrix_thumb_home
           shift: [pcol_x,pcol_y-1.5]
         params: 
-          width: 1
+          width: 0.25
           height: 0.25
           back: false
         nets:
