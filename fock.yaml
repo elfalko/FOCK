@@ -1047,68 +1047,187 @@ pcbs:
         params:
           points: [[-7,-3.25],[-16.5,-3.25]]
           side: "B"
+      t_shield:
+        type: trace
+        anchor:
+          ref: connector_c_r
+        params:
+          points: [[-6,-5.5],[-1.5,-5.5],[-0.5,-4.5],[-0.5,4.5],[-1.5,5.5],[-6,5.5]]
+          side: "B"
+          width: 0.5
 
+      battery_top:
+        type: jstph
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx,-0.5*cx]
+          rotate: 180
+        nets:
+          pos: "B1"
+          neg: "B2"
 
+      j_battery_RAWER_B1:
+        type: bridge
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx+1,-0.5*cx-2]
+          rotate: 180
+        nets:
+          from_1: "RAWER"
+          from_2: "RAWER"
+          to: "B1"
+        params:
+          reverse: true
+      j_battery_RAWER_B2:
+        type: bridge
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx-1,-0.5*cx-2]
+          rotate: 180
+        nets:
+          from_1: "RAWER"
+          from_2: "RAWER"
+          to: "B2"
+        params:
+          reverse: true
 
+      j_battery_RAW_B1:
+        type: bridge
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx+1,-0.5*cx+2]
+        nets:
+          from_1: "GND"
+          from_2: "GND"
+          to: "B1"
+        params:
+          reverse: true
+      j_battery_RAW_B2:
+        type: bridge
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx-1,-0.5*cx+2]
+        nets:
+          from_1: "GND"
+          from_2: "GND"
+          to: "B2"
+        params:
+          reverse: true
 
+      t_bat_b1:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx,-0.5*cx]
+        params:
+          reverse: true
+          points: [[-1,-1.5],[-1,1.5]]
+      t_bat_b2:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx,-0.5*cx]
+        params:
+          reverse: true
+          points: [[1,-1.5],[1,1.5]]
+      t_bat_gnd:
+        type: trace
+        anchor:
+          ref: connector_c_r
+          shift: [-7,-3.25]
+        params:
+          points: [[-3,-3],[-3,-0.5],[-2.5,0],[-0.5,0],[-1,-0.5],[-1,-3]]
+          reverse: true
 
-# -- cut in v1.0
-# battery and switch
-# oled support
-# 
-# no proper flip side support, aka doesn't mirror footprint
-# more parts to route and think about
+#     i2cheader_top:
+#       type: oled
+#       nets:
+#         a: GND
+#         b: P14
+#         c: P15
+#         d: RAWER
+#       params:
+#         side: f
+#       anchor:
+#         ref: 
+#           - matrix_inner_bottom
+#         shift: [1.5*cx,-0.5*cx]
+#         rotate: 0
 
-#      battery_top:
-#        type: jstph
-#        anchor:
-#          ref: 
-#            - matrix_inner_home
-#            - matrix_inner_top
-#          shift: [0.775*cx,5]
-#          rotate: 0
-#        nets:
-#          pos: RAWER
-#          neg: GND
+      powerswitch_f:
+        type: slider
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-10,-6]
+          rotate: 90
+        nets:
+          C: RAW
+          B: RAWER
+        params:
+          side: "F"
+      powerswitch_b:
+        type: slider
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-10,-6]
+          rotate: 90
+        nets:
+          A: RAW
+          B: RAWER
+        params:
+          side: "B"
 
-#      i2cheader_top:
-#        type: oled
-#        nets:
-#          a: GND
-#          b: P14
-#          c: P15
-#          d: RAWER
-#        params:
-#          side: f
-#        anchor:
-#          ref: 
-#            - matrix_inner_bottom
-#          shift: [1.5*cx,-0.5*cx]
-#          rotate: 0
+      v_ps_rawer:
+        type: via
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-6,-6]
+        nets:
+          net: "RAWER"
+      t_ps_rawer_f:
+        type: trace
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-6,-6]
+        params:
+          points: [[3.5,-0.4],[1.2,-0.8],[0,0],[-0.75,-0.75],[-1.5,-0.75]]
+      t_ps_rawer_b:
+        type: trace
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-6,-6]
+        params:
+          points: [[3.5,-0.4],[1.2,-0.8],[0,0],[-0.75,0.75],[-1.5,0.75]]
+          side: "B"
 
-#      powerswitch_b:
-#        type: slider
-#        anchor:
-#          ref: 
-#          - matrix_inner_top
-#          - matrix_inner_num
-#          shift: [0.65*cx,0]
-#          rotate: -90
-#        nets:
-#          from: RAW
-#          to: RAWER
-#        params:
-#          side: b
-#      powerswitch_f:
-#        type: slider
-#        anchor:
-#          ref: 
-#          - matrix_inner_top
-#          - matrix_inner_num
-#          shift: [0.65*cx,0]
-#          rotate: -90
-#        nets:
-#          from: RAW
-#          to: RAWER
-#        params:
-#          side: f
+      v_ps_raw:
+        type: via
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-7.25,-10]
+        nets:
+          net: "RAW"
+      t_ps_raw_f:
+        type: trace
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-7.25,-10]
+        params:
+          points: [[1,-6.5],[0.5,-6],[0,0],[0,1],[-0.5,1.5]]
+      t_ps_raw_b:
+        type: trace
+        anchor:
+          ref: 
+          - matrix_thumb_bottom
+          shift: [-7.25,-10]
+        params:
+          points: [[0,0],[0,1],[-0.5,1.5]]
+          side: "B"
+
