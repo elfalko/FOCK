@@ -13,19 +13,19 @@
 # - no batteries
 # - no USB-C :C between boards
 #
-# V1.1 routing improvements 
+# V2.0 rework
 # - reordered row & col nets for simpler routing
 # - flipped thumb row keys for simpler routing
-# - better switch footprint
+# - better footprints
 # - intra-board USB-C, doublesided
-# TODO
-# - wire up columns
-# - add my silkscreen logo as ergogen footprint
+# - battery support
+# - prewired most components
+# - important components get virtual key positions for easier placement of components around them
+# - add silkscreen logo as ergogen footprint
 
-# V2.0 todo
+# lookout
+# - 3D case and plate
 # - header for trackball
-# - flipped battery connector or just flip leads in connector
-# - move switch and battery so they are better placed for 
 
 units:
   keysize: 2
@@ -49,7 +49,7 @@ units:
   rpu_y: 1.5
   mcuip_x: 2.762
   mcuip_y: 2.54
-
+  logo: 3
 
 points:
   zones:
@@ -1258,3 +1258,20 @@ pcbs:
           points: [[0,0],[0,1],[-0.5,1.5]]
           side: "B"
 
+      logo_f:
+        type: hawklogo
+        anchor:
+          ref: 
+          - matrix_ring_bottom
+          - matrix_middle_bottom
+          shift: [logo,logo]
+      logo_b:
+        type: hawklogo
+        anchor:
+          ref:
+          - matrix_ring_bottom
+          - matrix_middle_bottom
+          shift: [logo,logo]
+        params:
+          side: "B"
+        
