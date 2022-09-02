@@ -25,7 +25,7 @@ So far planned are:
 ## Repo overview
 
 * Readme - this readme
-* fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires my fork though)
+* fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires [my fork](https://github.com/elfalko/ergogen) though, since several footprints have been heavily updated)
 * img/ - images for documentation
 
 ## TODO
