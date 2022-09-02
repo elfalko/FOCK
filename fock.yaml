@@ -558,30 +558,49 @@ pcbs:
         nets:
           from: RST
           to: GND
+      # reset_label:
+      #   type: text
+      #   anchor:
+      #     ref: matrix_inner_bottom
+      #     shift: [rst_x,rst_y]
+      #     rotate: 90
+      #   params:
+      #     text: "RST"
+      #     reverse: true
           
       pullup_p2:
         type: padpair
         anchor:
           ref: connector_c_r
           shift: [rpu_x,rpu_y]
-          rotate: 180
         nets:
-          A: RAW
-          B: P2
-        params:
-          text: "4k7"
+          A: P2
+          B: RAW
 
       pullup_p3:
         type: padpair
         anchor:
           ref: connector_c_r
           shift: [rpu_x,-rpu_y]
-          rotate: 180
         nets:
-          A: RAW
-          B: P3
-        params:
-          text: "4k7"
+          A: P3
+          B: RAW
+      # 4k7:
+      #   type: text
+      #   anchor:
+      #     ref: connector_c_r
+      #     shift: [rpu_x-3,0]
+      #     rotate: 90
+      #   params:
+      #     text: "4k7"
+      # usbc_label:
+      #   type: text
+      #   anchor:
+      #     ref: connector_c_r
+      #     shift: [-4,0]
+      #     rotate: 90
+      #   params:
+      #     text: "USB C  "
 
       t_p2_pu:
         type: trace
@@ -1089,6 +1108,23 @@ pcbs:
         nets:
           pos: "B1"
           neg: "B2"
+      bat_label_+:
+        type: text
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx-0.1,-0.5*cx-3.3]
+          rotate: 90
+        params:
+          text: "+"
+      bat_label_-:
+        type: text
+        anchor:
+          ref: connector_c_r
+          shift: [-0.5*cx-0.1,-0.5*cx+3.3]
+          rotate: 90
+        params:
+          text: "-"
+
 
       j_battery_RAWER_B1:
         type: bridge
@@ -1163,20 +1199,6 @@ pcbs:
           points: [[-3,-3],[-3,-0.5],[-2.5,0],[-0.5,0],[-1,-0.5],[-1,-3]]
           reverse: true
 
-#     i2cheader_top:
-#       type: oled
-#       nets:
-#         a: GND
-#         b: P14
-#         c: P15
-#         d: RAWER
-#       params:
-#         side: f
-#       anchor:
-#         ref: 
-#           - matrix_inner_bottom
-#         shift: [1.5*cx,-0.5*cx]
-#         rotate: 0
 
       powerswitch_f:
         type: slider
@@ -1202,6 +1224,15 @@ pcbs:
           B: RAWER
         params:
           side: "B"
+      # switch_label:
+      #   type: text
+      #   anchor:
+      #     ref: 
+      #     - matrix_thumb_bottom
+      #     shift: [-10,-6]
+      #     rotate: 90
+      #   params:
+      #     text: "PWR"
 
       v_ps_rawer:
         type: via
@@ -1271,4 +1302,38 @@ pcbs:
           shift: [logo,logo]
         params:
           side: "B"
+      label:
+        type: text
+        anchor:
+          ref: mcu_c_r
+          shift: [11,0]
+          rotate: 90
+        params:
+          text: "elfalko/FOCK V2.0"
+
+      jlc:
+        type: text
+        anchor:
+          ref: mcu_c_r
+          shift: [-11,-6]
+          rotate: 90
+        params:
+          text: "JLCJLCJLCJLC"
+          reverse: false
         
+## maybe V3
+#     i2cheader_top:
+#       type: oled
+#       nets:
+#         a: GND
+#         b: P14
+#         c: P15
+#         d: RAWER
+#       params:
+#         side: f
+#       anchor:
+#         ref: 
+#           - matrix_inner_bottom
+#         shift: [1.5*cx,-0.5*cx]
+#         rotate: 0
+
