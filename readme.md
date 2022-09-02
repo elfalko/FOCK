@@ -1,39 +1,36 @@
 # FOCK - Falk's Overstaggered Corne Keyboard
 
-![FOCK Layout preview](img/layout-preview.png)
+![FOCK Layout preview](img/layout-v2.png)
+![FOCK Layout preview](img/v1wswitches.jpg)
 
 ## Status
 
-rough layout done
+V2 is ready for production
+V1 failed due to layout "improvements" with traces on the wrong PCB side
 
 ## Why
 
-[CRKBD](https://github.com/foostan/crkbd) is nice, but could use more stagger.
+[CRKBD](https://github.com/foostan/crkbd) is nice, but could use more stagger, a num row and USB-C
 
 ## Features
 
 So far planned are:
 
 * ZMK support
-* 42 keys
-* promicro driven
+* 56 keys
+* puchi-c driven, pro-micro compatible
 * usb c cable for connection between halves
-* future battery support for bluetooth action
+* battery support for future bluetooth action
 
 ## Repo overview
 
 * Readme - this readme
-* fock.txt - generator file for [ergogen](https://github.com/ergogen/ergogen) (for direct use try [this](https://ergogen.cache.works/) and copy in the contents
+* fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires my fork though)
 * img/ - images for documentation
 
 ## TODO
 
-* [ ] verify key sizes
-* [ ] route kicad
-  * [ ] promicro or similar controller
-  * [ ] optional num row
-  * [ ] mouse bites to break off excessive parts
-  * [ ] battery
-  * [ ] usb c connectors
+* [ ] optional num row
+* [ ] mouse bites to break off excessive parts
 * [ ] good case
 * [ ] ZMK config
