@@ -5,8 +5,10 @@
 
 ## Status
 
-V2 is ready for production
-V1 failed due to layout "improvements" with traces on the wrong PCB side
+| Version | Status |
+| --- | --- |
+| V2 | ready for production |
+| V1 | failed due to layout "improvements" with traces on the wrong PCB side |
 
 ## Why
 
@@ -22,15 +24,23 @@ So far planned are:
 * usb c cable for connection between halves
 * battery support for future bluetooth action
 
+Explicitly not planned:
+
+* LEDs (over/under/any glow)
+* return to TRRS
+* Rotary encoders
+
 ## Repo overview
 
 * Readme - this readme
 * fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires [my fork](https://github.com/elfalko/ergogen) though, since several footprints have been heavily updated)
 * img/ - images for documentation
 
-## TODO
+## TODO or future plans
 
 * [ ] optional num row
 * [ ] mouse bites to break off excessive parts
 * [ ] good case
 * [ ] ZMK config
+* [ ] trackball support
+* [ ] trackpad support
