@@ -1,7 +1,9 @@
 # FOCK - Falk's Overstaggered Corne Keyboard
 
-![FOCK Layout preview](img/layout-v2.png)
-![FOCK Layout preview](img/v1wswitches.jpg)
+
+|![Layout](img/layout-v2.png)|![V1 with keys](img/v1wswitches.jpg)|
+|---|---|
+|ergogen key matrix preview|V1 with keys|
 
 ## Status
 
@@ -16,9 +18,7 @@
 
 ## Features
 
-So far planned are:
-
-* ZMK support
+* fully reversible PCB
 * 56 keys
 * puchi-c driven, pro-micro compatible
 * usb c cable for connection between halves
@@ -38,6 +38,8 @@ Explicitly not planned:
 
 ## TODO or future plans
 
+* [ ] QMK support
+* [ ] ZMK support
 * [ ] optional num row
 * [ ] mouse bites to break off excessive parts
 * [ ] good case
