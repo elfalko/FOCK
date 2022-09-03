@@ -225,7 +225,7 @@ points:
             nets:
               net: 'P2'
             params:
-              d: 0.2
+              d: 0.3
           trace_dmin_f:
             type: trace
             params:
@@ -244,7 +244,7 @@ points:
             nets:
               net: 'P3'
             params:
-              d: 0.2
+              d: 0.3
           trace_dplus_f:
             type: trace
             params:
@@ -264,7 +264,7 @@ points:
             nets:
               net: 'CC2'
             params:
-              d: 0.2
+              d: 0.3
           trace_cc2_f:
             type: trace
             params:
@@ -283,7 +283,7 @@ points:
             nets:
               net: 'SBU1'
             params:
-              d: 0.2
+              d: 0.3
           trace_sbu1_f:
             type: trace
             params:
@@ -302,7 +302,7 @@ points:
             nets:
               net: 'SBU2'
             params:
-              d: 0.2
+              d: 0.3
           trace_sbu2_f:
             type: trace
             params:
@@ -321,7 +321,7 @@ points:
             nets:
               net: 'CC1'
             params:
-              d: 0.2
+              d: 0.3
           trace_cc1_f:
             type: trace
             params:
@@ -340,7 +340,7 @@ points:
             nets:
               net: 'RAW'
             params:
-              d: 0.2
+              d: 0.3
           via_vbus_2:
             type: via
             anchor:
@@ -348,7 +348,7 @@ points:
             nets:
               net: 'RAW'
             params:
-              d: 0.2
+              d: 0.3
           trace_vbus_f:
             type: trace
             params:
@@ -372,7 +372,7 @@ points:
             nets:
               net: 'GND'
             params:
-              d: 0.2
+              d: 0.3
           via_gnd_2:
             type: via
             anchor:
@@ -380,7 +380,7 @@ points:
             nets:
               net: 'GND'
             params:
-              d: 0.2
+              d: 0.3
           trace_gnd_f1:
             type: trace
             params:
@@ -669,7 +669,7 @@ pcbs:
         type: trace
         anchor:
           ref: matrix_inner_bottom
-          shift: [-7.8,3]
+          shift: [-7.7,3]
         params:
           points: [[0,0],[0,54]]
       t_col_thumb:
@@ -688,7 +688,7 @@ pcbs:
           ref: matrix_outer_num
           shift: [6,-6.6]
         params:
-          points: [[43.75,-58],[-2,-58],[-4,-56],[-4,-2],[-2,0],[22,0],[28.9,6.9]]
+          points: [[43.75,-58],[-13,-58],[-15,-56],[-15,-2],[-13,0],[22,0],[28.9,6.9]]
           side: "B"
       t_row_num_ring:
         type: trace
@@ -712,7 +712,7 @@ pcbs:
           ref: matrix_index_num
           shift: [-10,-6.6]
         params:
-          points: [[16,0],[37,0],[38.5,-1.5],[38.5,-18.75],[39,-19.25],[39,-27],[40,-28],[48,-28],[48.25,-28.25]]
+          points: [[16,0],[37,0],[38.5,-1.5],[38.5,-18.75],[39,-19.25],[39,-27],[39.9,-27.9],[47.9,-27.9],[48.25,-28.25]]
           side: "B"
 
       #top
@@ -746,7 +746,7 @@ pcbs:
           ref: matrix_index_top
           shift: [-10,-6.6]
         params:
-          points: [[16,0],[37,0],[38.5,-1.5],[38.5,-12.1],[39,-12.6],[48.25,-12.6],[48.5,-12.85]]
+          points: [[16,0],[37,0],[38.5,-1.5],[38.5,-12.1],[38.9,-12.5],[48.15,-12.5],[48.5,-12.85]]
           side: "B"
 
       #home
@@ -799,15 +799,15 @@ pcbs:
           ref: matrix_outer_bottom
           shift: [6,-6.6]
         params:
-          points: [[0,0],[21,0],[23.65,2.1],[26.65,5.1]]
+          points: [[0,0],[18,0],[36.75,13]]
           side: "B"
       t_row_bottom_ring:
         type: trace
         anchor:
           ref: matrix_ring_bottom
-          shift: [-10,-6.6]
+          shift: [6,-6.6]
         params:
-          points: [[5,-13.5],[5,-2],[7,0],[18,0],[20,2],[20,6.5]]
+          points: [[0,0],[2,0],[4,2],[4,6.5]]
           side: "B"
       t_row_bottom_middle:
         type: trace
@@ -1003,13 +1003,13 @@ pcbs:
           ref: matrix_index_bottom
           shift: [via1_x, via1_y]
         params:
-          points: [[0,0],[1.7,1.7],[21.5,1.7]]
+          points: [[0,0],[1.7,1.7],[21.5,1.55]]
           side: "B"
       v_col_index:
         type: via
         anchor:
           ref: matrix_index_bottom
-          shift: [via1_x+21.5, via1_y+1.7]
+          shift: [via1_x+21.5, via1_y+1.55]
         nets: 
           net: "P5"
       t_col_index_in:
@@ -1018,7 +1018,7 @@ pcbs:
           ref: matrix_index_bottom
           shift: [via1_x,via1_y]
         params:
-          points: [[21.5,1.7],[33.5,1.7],[34,2.3]]
+          points: [[21.5,1.55],[33.35,1.55],[34,2.3]]
 
 
       t_col_thumb_in:
@@ -1097,7 +1097,7 @@ pcbs:
         params:
           points: [[-6,-5.5],[-1.5,-5.5],[-0.5,-4.5],[-0.5,4.5],[-1.5,5.5],[-6,5.5]]
           side: "B"
-          width: 0.5
+          width: 0.35
 
       battery_top:
         type: jstph
@@ -1212,6 +1212,7 @@ pcbs:
           B: RAWER
         params:
           side: "F"
+          holes: false
       powerswitch_b:
         type: slider
         anchor:
