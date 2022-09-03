@@ -1,6 +1,8 @@
-.PHONY: all
+.PHONY: all fock
 
 all:
+	make fock
+fock:
 	node ../ergogen/src/cli.js ../fock/fock.yaml -o ../fock/output
 route:
 	#pkill kicad 
