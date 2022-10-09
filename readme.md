@@ -1,16 +1,12 @@
 # FOCK - Falk's Overstaggered Corne Keyboard
 
+![FOCK at work, no batteries](img/spreadatwork1.jpg)
 
-|![Layout](img/layout-v2.png)|![V1 with keys](img/v1wswitches.jpg)|
-|---|---|
-|ergogen key matrix preview|V1 with keys|
+FOCK at work, still waiting for batteries
 
 ## Status
 
-| Version | Status |
-| --- | --- |
-| V2 | ready for production |
-| V1 | failed due to layout "improvements" with traces on the wrong PCB side |
+V2 is my daily driver since a couple of weeks
 
 ## Why
 
@@ -19,10 +15,10 @@
 ## Features
 
 * fully reversible PCB
-* 56 keys
-* puchi-c driven, pro-micro compatible
+* 54 keys (6x4 + 4 thumb keys per side)
+* nice!nanoV2 driven, pro-micro compatible
 * usb c cable for connection between halves
-* battery support for future bluetooth action
+* [ZMK support](https://github.com/elfalko/fock-zmk)
 
 Explicitly not planned:
 
@@ -39,10 +35,18 @@ Explicitly not planned:
 ## TODO or future plans
 
 * [ ] QMK support
-* [ ] ZMK support
-* [ ] optional num row
-* [ ] mouse bites to break off excessive parts
+* [ ] test battery support
+* [ ] optional num row w mouse bites
 * [ ] good case
-* [ ] ZMK config
-* [ ] trackball support
-* [ ] trackpad support
+* [ ] trackball/trackpad support
+
+## License and usage
+
+Feel free to use anything in this repo for inspiration and for any projects.
+If you do, please send me a message, I will be stoked to hear about it.
+
+Officially, this is under LGPLv2.1 license.
+
+Please be aware that this is a personal project and not subject to any kind of safety testing other than me using it daily and not having electrified myself doing so (yet).
+All risks using this are your own.
+
