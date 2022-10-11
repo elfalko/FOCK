@@ -29,7 +29,7 @@ Explicitly not planned:
 ## Repo overview
 
 * Readme - this readme
-* fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires [my fork](https://github.com/elfalko/ergogen) though, since several footprints have been heavily updated)
+* fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires [the master branch from my fork](https://github.com/elfalko/ergogen/tree/master) though, since several footprints have been heavily updated)
 * img/ - images for documentation
 
 ## TODO or future plans
