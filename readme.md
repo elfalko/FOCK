@@ -6,7 +6,8 @@ FOCK at work, still waiting for batteries
 
 ## Status
 
-V2 is my daily driver since a couple of weeks
+V2 is my daily driver running on ZMK since 09/22
+There is no firmware supporting the USB-C connection between halves yet, but electronically the connections should be sound.
 
 ## Why
 
@@ -18,6 +19,7 @@ V2 is my daily driver since a couple of weeks
 * 54 keys (6x4 + 4 thumb keys per side)
 * nice!nanoV2 driven, pro-micro compatible
 * usb c cable for connection between halves
+* battery support
 * [ZMK support](https://github.com/elfalko/fock-zmk)
 
 Explicitly not planned:
@@ -31,11 +33,11 @@ Explicitly not planned:
 * Readme - this readme
 * fock.yaml - generator file for [ergogen](https://github.com/ergogen/ergogen) (requires [the master branch from my fork](https://github.com/elfalko/ergogen/tree/master) though, since several footprints have been heavily updated)
 * img/ - images for documentation
+* [Assembly manual](./assembly.md)
 
 ## TODO or future plans
 
 * [ ] QMK support
-* [ ] test battery support
 * [ ] optional num row w mouse bites
 * [ ] good case
 * [ ] trackball/trackpad support
