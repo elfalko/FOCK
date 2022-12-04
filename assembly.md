@@ -14,7 +14,7 @@ Following sections will be marked with `TOP` or `BOTTOM` side to indicate on whi
 
 ## SMD components
 
-### USB-C port and pullups
+### USB-C port and pullups (optional)
 
 `TOP SIDE`
 
@@ -61,7 +61,7 @@ Depending on your configuration, connect the correct solder jumpers by touching 
 The reset buttons are simple. Start with any leg and push it in place,
 Then fix the opposite leg before proceeding with the rest.
 
-### Components for wireless operation
+### Components for wireless operation (optional)
 
 The components in this section are only necessary when operating from battery power.
 They can be added later if you are still waiting on batteries.
@@ -79,7 +79,7 @@ Just like the reset button.
 
 I put the battery on the bottom side, but if you flip your nice!nanos, you could also place batteries on the top side. Adjust the position accordingly.
 
-#### Battery assembly
+#### Battery assembly 
 
 1. Use a multimeter to verify the cable colors match polarity on the battery. You do not want to mess up this and fry your controller.
 2. Crimp on the JST connector. Crimp tutorials for microfit connectors help. A self-closing soldering tweezer can be used to grab the lead at the right distance to ensure it is not pushed to far in the crimping tool. 
@@ -145,7 +145,7 @@ Check the readme for valid ZMK/QMK configs.
 On linux, I recommend `xev` for this, as it easily show pressed keys.
 If a key does not work, check the Debugging section and fix it now.
 
-### Plug in battery
+### Plug in battery (optional)
 
 I would do this step only after verifying everything else works on cable power.
 
@@ -157,6 +157,22 @@ Secure it on the board - below the microcontroller or on the opposite side of th
 Then plug the battery in.
 
 Turn on both keyboard halves and enjoy.
+
+## Case/Tenting/Rubber feet (optional)
+
+Add whatever external parts you have to make the keyboard more comfortable and comfortable.
+To attach cases, 7 extra mounting holes are present in the PCB:
+
+* next to the reset button
+* in the num rom between index and middle finger columns
+* in the num rom between ring and pinky finger columns
+* between thumb cluster and pinky cluster
+* between the 4 top keys of the index cluster
+* between the 4 top keys of the pinky cluster
+* between the 4 bottom keys of the pinky cluster
+
+The rubber feet are only optional if you have a way better solutions, otherwise they are essetinal. I recommend sticking them on the plastic part of switch sockets.
+
 
 ## Send me a picture.
 

@@ -1,12 +1,16 @@
 # FOCK - Falk's Overstaggered Corne Keyboard
 
 ![FOCK at work, no batteries](img/spreadatwork1.jpg)
-
 FOCK at work, still waiting for batteries
+
+![Underside with battery](img/underside_battery.jpg)
+Underside with simple standoff tenting and battery held by double sided tape
+
 
 ## Status
 
-V2 is my daily driver running on ZMK since 09/22
+V2 is my daily driver running on ZMK since 09/22.
+
 There is no firmware supporting the USB-C connection between halves yet, but electronically the connections should be sound.
 
 ## Why
