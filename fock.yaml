@@ -33,6 +33,8 @@ units:
   fillfix: -0.8
   ctl_x: 34.8+keysize
   ctl_y: 50
+  batt_x: 14
+  batt_y: 47
   trrs_x: 2*cx
   trrs_y: -0.5*cx
   usbc_x: 2.05*cx
@@ -489,6 +491,13 @@ outlines:
         anchor:
           ref: matrix_inner_bottom
           shift: [0,-cx]
+    battery:
+      main:
+        type: rectangle
+        size: [batt_x,batt_y]
+        anchor:
+          ref: mcu_c_r
+          shift: [-batt_x/2,-0.75*batt_y]
     cut_filler:
       cf1:
         type: rectangle
@@ -527,6 +536,19 @@ outlines:
     pcb_shape:
       - +pcb_shape_fillet
       - -screw_holes
+
+    key_mounts:
+      main: 
+        type: keys
+        side: left
+        bound: false
+        size: 13.8 
+    just_key_mounts:
+      - +key_mounts
+      - -cutoffs
+
+
+
 cases:
 #  fits the key cap size, not the switches
 #  capsize:
@@ -534,14 +556,22 @@ cases:
 #      extrude: 2
 
 # fits switches for handwiring
-  keysize:
-     - name: top_plate_keysize
-       extrude: 2
-# pcb
+# only underside so far
   pcb:
     - name: pcb_shape
       # technically only 1.7
       extrude: 2
+    - name: just_key_mounts
+      extrude: 2
+      shift: [0, 0, 2]
+      operation: add
+    - name: battery
+      extrude: 6
+      shift: [0, 0, 2]
+      operation: add
+    - name: screw_holes
+      extrude: 10
+      operation: subtract
   screws:
     - name: screw_holes
       extrude: 10
