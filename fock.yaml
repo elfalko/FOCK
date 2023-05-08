@@ -532,10 +532,19 @@ cases:
 #  capsize:
 #    - name: top_plate_capsize
 #      extrude: 2
+
 # fits switches for handwiring
   keysize:
      - name: top_plate_keysize
        extrude: 2
+# pcb
+  pcb:
+    - name: pcb_shape
+      # technically only 1.7
+      extrude: 2
+  screws:
+    - name: screw_holes
+      extrude: 10
 pcbs:
   main:
     outlines:
