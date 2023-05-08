@@ -561,6 +561,10 @@ cases:
     - name: pcb_shape
       # technically only 1.7
       extrude: 2
+  pcb_underside:
+    - name: pcb_shape
+      # technically only 1.7
+      extrude: 2
     - name: just_key_mounts
       extrude: 2
       shift: [0, 0, 2]
